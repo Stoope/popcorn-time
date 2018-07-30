@@ -1,4 +1,4 @@
 // @flow
 /*eslint-disable */
-declare type Action = { type: string, payload: Object };
+type Action = { type: string, payload: Object };
 /*eslint-enable */

@@ -4,8 +4,10 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from '../reducers';
 
-class Redux extends React.Component<{ children?: React.Node }> {
-  constructor(props) {
+type Props = { children?: React.Node };
+
+class Redux extends React.Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.store = createStore(rootReducer);
   }
