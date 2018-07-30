@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from '../reducers';
 
@@ -9,7 +9,14 @@ type Props = { children?: React.Node };
 class Redux extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-    this.store = createStore(rootReducer);
+    const middleware = [];
+    const composeEnhancers =
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    this.store = createStore(
+      rootReducer,
+      undefined,
+      composeEnhancers(applyMiddleware(...middleware))
+    );
   }
   store: any = null;
   render() {

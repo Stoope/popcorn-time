@@ -1,6 +1,11 @@
 // @flow
 const { app, BrowserWindow } = require('electron');
 const url = require('url');
+const {
+  default: installExtension,
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS
+} = require('electron-devtools-installer');
 
 const path = require('path');
 
@@ -11,6 +16,12 @@ if (process.env.ELECTRON_START_URL) {
 let mainWindow;
 
 function createWindow() {
+  [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
+    installExtension(extension)
+      .then(name => console.log(`Added Extension: ${name}`))
+      .catch(err => console.log('An error occurred: ', err));
+  });
+
   mainWindow = new BrowserWindow({ width: 1280, height: 720 });
 
   const startUrl =
