@@ -6,8 +6,9 @@
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "rm -rf build/* && parcel ./src/app/index.html -d build/",
-    "start": "ELECTRON_START_URL=http://localhost:1234 electron .",
+    "parcel:dev": "rm -rf build/* && parcel ./src/app/index.html -d build/",
+    "electron:dev": "ELECTRON_START_URL=http://localhost:1234 electron .",
+    "start": "concurrently \"yarn parcel:dev\" \"yarn electron:dev\"",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "babel-eslint": "8.2.6",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
+    "concurrently": "3.6.1",
     "electron": "2.0.5",
     "electron-packager": "12.1.0",
     "electron-rebuild": "1.8.1",
