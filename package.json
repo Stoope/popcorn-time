@@ -3,13 +3,24 @@
   "version": "1.0.0",
   "repository": "git@github.com:Stoope/popcorn-time.git",
   "author": "Stepan Kurennykh <stoope@outlook.com>",
-  "main": "src/index.js",
+  "main": "./src/index.js",
   "license": "MIT",
   "scripts": {
     "parcel:dev": "rm -rf build/* && parcel ./src/app/index.html -d build/",
     "electron:dev": "ELECTRON_START_URL=http://localhost:1234 electron .",
     "start": "concurrently \"yarn parcel:dev\" \"yarn electron:dev\"",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "build": "rm -rf build/* && parcel build ./src/app/index.html -d build/ --public-url ./ && electron-builder"
+  },
+  "build": {
+    "appId": "popcorn.time",
+    "mac": {
+      "category": "public.app-category.entertainment"
+    },
+    "files": [
+      "./src/index.js",
+      "build/*"
+    ]
   },
   "dependencies": {
     "@material-ui/core": "1.4.2",
@@ -22,6 +33,7 @@
     "babel-preset-react": "6.24.1",
     "concurrently": "3.6.1",
     "electron": "2.0.5",
+    "electron-builder": "20.26.0",
     "electron-packager": "12.1.0",
     "electron-rebuild": "1.8.1",
     "electron-reload": "1.2.5",
