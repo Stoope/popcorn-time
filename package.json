@@ -10,7 +10,8 @@
     "electron:dev": "ELECTRON_START_URL=http://localhost:1234 electron .",
     "start": "concurrently \"yarn parcel:dev\" \"yarn electron:dev\"",
     "precommit": "lint-staged",
-    "build": "rm -rf build/* && parcel build ./src/app/index.html -d build/ --public-url ./ && electron-builder"
+    "build": "rm -rf build/* && parcel build ./src/app/index.html -d build/ --public-url ./ && electron-builder",
+    "flow-typed": "flow-typed install"
   },
   "build": {
     "appId": "popcorn.time",
@@ -40,6 +41,8 @@
     "eslint": "5.2.0",
     "eslint-plugin-flowtype": "2.50.0",
     "eslint-plugin-react": "7.10.0",
+    "flow-bin": "0.77.0",
+    "flow-typed": "2.5.1",
     "lint-staged": "7.2.0",
     "parcel-bundler": "1.9.7",
     "prettier": "1.14.0"

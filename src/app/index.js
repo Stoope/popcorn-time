@@ -1,10 +1,18 @@
+// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class App extends React.Component {
+class App extends React.Component<{}> {
+  func = (a: number) => {
+    return a;
+  };
   render() {
-    return <h1>dasdasdasdasdas)</h1>;
+    const res = 'this.func()';
+    return <h1>{res}</h1>;
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = document.getElementById('root');
+if (root != null) {
+  ReactDOM.render(<App />, root);
+}
