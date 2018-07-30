@@ -1,0 +1,9 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["react", "flowtype"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "env": {
+    "node": true,
+    "browser": true
+  }
+}

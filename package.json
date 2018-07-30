@@ -6,17 +6,35 @@
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "dev": "rm -rf build/* && parcel ./src/app/index.html -d build/",
+    "start": "ELECTRON_START_URL=http://localhost:1234 electron .",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@material-ui/core": "1.4.2",
-    "axios": "0.18.0",
     "react": "16.4.1",
     "react-dom": "16.4.1"
   },
   "devDependencies": {
+    "babel-eslint": "8.2.6",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-react": "6.24.1",
     "electron": "2.0.5",
-    "webpack": "4.16.3",
-    "webpack-dev-server": "3.1.5"
+    "electron-packager": "12.1.0",
+    "electron-rebuild": "1.8.1",
+    "electron-reload": "1.2.5",
+    "eslint": "5.2.0",
+    "eslint-plugin-flowtype": "2.50.0",
+    "eslint-plugin-react": "7.10.0",
+    "lint-staged": "7.2.0",
+    "parcel-bundler": "1.9.7",
+    "prettier": "1.14.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json}": [
+      "eslint --max-warnings=0",
+      "prettier --single-quote --write",
+      "git add"
+    ]
   }
 }
