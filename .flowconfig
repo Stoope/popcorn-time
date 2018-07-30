@@ -1,5 +1,5 @@
 [ignore]
-.*/node_modules/.*
+.*/node_modules/electron-packager/test/fixtures/infer-malformed-json/package.json
 
 [include]
 
@@ -9,5 +9,6 @@ flow-typed/
 [lints]
 
 [options]
+module.file_ext=.css
 
 [strict]

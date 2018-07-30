@@ -1,18 +1,20 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
+import { MaterialUI } from './HOCs';
+import App from './components';
 
-class App extends React.Component<{}> {
-  func = (a: number) => {
-    return a;
-  };
+class Component extends React.Component<{}> {
   render() {
-    const res = 'this.func()';
-    return <h1>{res}</h1>;
+    return (
+      <MaterialUI>
+        <App />
+      </MaterialUI>
+    );
   }
 }
 
 const root = document.getElementById('root');
 if (root != null) {
-  ReactDOM.render(<App />, root);
+  ReactDOM.render(<Component />, root);
 }
