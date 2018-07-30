@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "repository": "git@github.com:Stoope/popcorn-time.git",
   "author": "Stepan Kurennykh <stoope@outlook.com>",
+  "main": "src/index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
   "dependencies": {
     "@material-ui/core": "1.4.2",
     "axios": "0.18.0",
