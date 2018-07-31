@@ -1,11 +1,7 @@
 {
   "parser": "babel-eslint",
-  "plugins": ["flowtype", "react"],
-  "extends": [
-    "plugin:flowtype/recommended",
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "plugins": ["react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "env": {
     "node": true,
     "browser": true,
@@ -13,6 +9,7 @@
     "jest": true
   },
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "react/prop-types": 0
   }
 }

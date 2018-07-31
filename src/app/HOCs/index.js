@@ -1,4 +1,4 @@
-// @flow
+
 import MaterialUI from './MaterialUI';
 import ReduxWithMidleware from './ReduxWithMidleware';
 

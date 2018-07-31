@@ -1,5 +1,3 @@
-// @flow
-import type { Saga } from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import _flatten from 'lodash/flatten';
 
@@ -7,14 +5,14 @@ import { settingsSagas } from '~/components/settings';
 
 const composeSagas = (...sagas) =>
   _flatten(
-    sagas.map((saga: Object) => [
+    sagas.map(saga => [
       ...Object.keys(saga)
-        .filter((key: string) => typeof saga[key] === 'function')
-        .map((func: string) => saga[func]())
+        .filter(key => typeof saga[key] === 'function')
+        .map(func => saga[func]())
     ])
   );
 
-function* rootSaga(): Saga<void> {
+function* rootSaga() {
   yield all(composeSagas(settingsSagas));
 }
 

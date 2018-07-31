@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
@@ -6,10 +5,8 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
-type Props = { children?: React.Node };
-
-class ReduxWithMidleware extends React.Component<Props> {
-  constructor(props: Props) {
+class ReduxWithMidleware extends React.Component {
+  constructor(props) {
     super(props);
 
     const sagaMiddleware = createSagaMiddleware();
@@ -23,7 +20,7 @@ class ReduxWithMidleware extends React.Component<Props> {
     );
     sagaMiddleware.run(rootSaga);
   }
-  store: any = null;
+  store = null;
   render() {
     return <Provider store={this.store}>{this.props.children}</Provider>;
   }

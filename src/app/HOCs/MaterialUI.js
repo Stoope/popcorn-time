@@ -1,18 +1,13 @@
-// @flow
 import * as React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import 'typeface-roboto';
-import type { Config, Theme } from '~/components/settings';
-import type { ReduxState } from '~reduxState';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 
-type Props = { children?: React.Node, config: Config };
-
 const generateMuiTheme = memoizeOne(
-  (theme: ?Theme) =>
+  theme =>
     createMuiTheme({
       palette: {
         type: get(theme, 'type', 'light')
@@ -21,8 +16,8 @@ const generateMuiTheme = memoizeOne(
   isEqual
 );
 
-class MaterialUI extends React.Component<Props, { muTheme?: Object }> {
-  constructor(props: Props) {
+class MaterialUI extends React.Component {
+  constructor(props) {
     super(props);
     const { config } = props;
     this.state = {
@@ -42,6 +37,6 @@ class MaterialUI extends React.Component<Props, { muTheme?: Object }> {
   }
 }
 
-export default connect((state: ReduxState) => ({
+export default connect(state => ({
   config: state.settingsReducer.config
 }))(MaterialUI);

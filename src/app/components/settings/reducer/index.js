@@ -1,32 +1,15 @@
-// @flow
-import type { Action } from '../actions';
 import * as constants from '../constants';
 import merge from 'deepmerge';
 
-export type Theme = {
-  type?: 'light' | 'dark',
-  fontSize?: string
-};
-export type Config = {
-  theme?: Theme
-};
-export type State = {
-  +config: Config,
-  +error: ?string,
-  +isLoading: boolean,
-  +isSettingsOpen: boolean,
-  +isSaving: boolean
-};
-
-const initialState: State = {
+const initialState = {
   config: { theme: { type: 'dark', fontSize: '18px' } },
   isLoading: false,
   isSaving: false,
-  isSettingsOpen: false,
+  isSettingsOpenk: false,
   error: null
 };
 
-const reducer = (state: State = initialState, action: Action): State => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case constants.OPEN_SETTINGS:
       return {
