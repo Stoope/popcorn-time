@@ -11,5 +11,6 @@ flow-typed/
 
 [options]
 module.name_mapper='~' ->'<PROJECT_ROOT>/src/app'
+module.name_mapper='~reduxState' ->'<PROJECT_ROOT>/src/app/HOCs/ReduxWithMidleware/reducers/reduxState'
 
 [strict]

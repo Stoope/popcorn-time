@@ -10,7 +10,7 @@ import {
 } from '../constants';
 
 export type Config = {
-  fontSize?: string
+  type?: 'light' | 'dark'
 };
 export type State = {
   +config: Config,
@@ -20,7 +20,7 @@ export type State = {
 };
 
 const initialState: State = {
-  config: { fontSize: '18px' },
+  config: { type: 'dark' },
   isLoading: false,
   isSaving: false,
   error: null

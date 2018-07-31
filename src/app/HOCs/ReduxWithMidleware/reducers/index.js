@@ -2,6 +2,9 @@
 import { combineReducers } from 'redux';
 import { settingsReducer } from '~/components/settings';
 
-export default combineReducers({
+const reducers = {
   settingsReducer
-});
+};
+export type Reducers = typeof reducers;
+
+export default combineReducers(reducers);
