@@ -1,32 +1,33 @@
 // @flow
 import type { Config } from '../reducer';
-import {
-  SAVE_SETTINGS,
-  SAVE_SETTINGS_SUCCESS,
-  SAVE_SETTINGS_ERROR,
-  LOAD_SETTINGS,
-  LOAD_SETTINGS_SUCCESS,
-  LOAD_SETTINGS_ERROR,
-  CHANGE_SETTINGS
-} from '../constants';
+import * as constants from '../constants';
 
-type LoadSettings = { +type: typeof LOAD_SETTINGS };
+type LoadSettings = { +type: typeof constants.LOAD_SETTINGS };
 type LoadSettingsSuccess = {
-  +type: typeof LOAD_SETTINGS_SUCCESS,
+  +type: typeof constants.LOAD_SETTINGS_SUCCESS,
   payload: Config
 };
 type LoadSettingsError = {
-  +type: typeof LOAD_SETTINGS_ERROR,
+  +type: typeof constants.LOAD_SETTINGS_ERROR,
   payload: string
 };
-type ChangeSettings = { +type: typeof CHANGE_SETTINGS, payload: Config };
-type SaveSettings = { +type: typeof SAVE_SETTINGS };
+type ChangeSettings = {
+  +type: typeof constants.CHANGE_SETTINGS,
+  payload: Config
+};
+type SaveSettings = { +type: typeof constants.SAVE_SETTINGS };
 type SaveSettingsSuccess = {
-  +type: typeof SAVE_SETTINGS_SUCCESS
+  +type: typeof constants.SAVE_SETTINGS_SUCCESS
 };
 type SaveSettingsError = {
-  +type: typeof SAVE_SETTINGS_ERROR,
+  +type: typeof constants.SAVE_SETTINGS_ERROR,
   payload: string
+};
+type OpenSettings = {
+  +type: typeof constants.OPEN_SETTINGS
+};
+type CloseSettings = {
+  +type: typeof constants.CLOSE_SETTINGS
 };
 
 export type Action =
@@ -36,30 +37,38 @@ export type Action =
   | LoadSettings
   | LoadSettingsSuccess
   | LoadSettingsError
-  | ChangeSettings;
+  | ChangeSettings
+  | OpenSettings
+  | CloseSettings;
 
+export const closeSettings = (): CloseSettings => ({
+  type: constants.CLOSE_SETTINGS
+});
+export const openSettings = (): OpenSettings => ({
+  type: constants.OPEN_SETTINGS
+});
 export const changeSettings = (payload: Config): ChangeSettings => ({
-  type: CHANGE_SETTINGS,
+  type: constants.CHANGE_SETTINGS,
   payload
 });
 export const saveSettings = (): SaveSettings => ({
-  type: SAVE_SETTINGS
+  type: constants.SAVE_SETTINGS
 });
 export const saveSettingsSuccess = (): SaveSettingsSuccess => ({
-  type: SAVE_SETTINGS_SUCCESS
+  type: constants.SAVE_SETTINGS_SUCCESS
 });
 export const saveSettingsError = (payload: string): SaveSettingsError => ({
-  type: SAVE_SETTINGS_ERROR,
+  type: constants.SAVE_SETTINGS_ERROR,
   payload
 });
 export const loadSettings = (): LoadSettings => ({
-  type: LOAD_SETTINGS
+  type: constants.LOAD_SETTINGS
 });
 export const loadSettingsSuccess = (payload: Config): LoadSettingsSuccess => ({
-  type: LOAD_SETTINGS,
+  type: constants.LOAD_SETTINGS_SUCCESS,
   payload
 });
 export const loadSettingsError = (payload: string): LoadSettingsError => ({
-  type: LOAD_SETTINGS_ERROR,
+  type: constants.LOAD_SETTINGS_ERROR,
   payload
 });

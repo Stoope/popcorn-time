@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import 'typeface-roboto/index.css';
+import 'typeface-roboto';
 import type { Config, Theme } from '~/components/settings';
 import type { ReduxState } from '~reduxState';
 import get from 'lodash/get';
