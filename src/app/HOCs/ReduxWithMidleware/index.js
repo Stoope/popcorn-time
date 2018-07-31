@@ -1,15 +1,19 @@
 // @flow
 import * as React from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
-import rootReducer from '../reducers';
+import rootReducer from './reducers';
+import rootSaga from './sagas';
 
 type Props = { children?: React.Node };
 
 class ReduxWithMidleware extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-    const middleware = [];
+
+    const sagaMiddleware = createSagaMiddleware();
+    const middleware = [sagaMiddleware];
     const composeEnhancers =
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     this.store = createStore(
@@ -17,6 +21,7 @@ class ReduxWithMidleware extends React.Component<Props> {
       undefined,
       composeEnhancers(applyMiddleware(...middleware))
     );
+    sagaMiddleware.run(rootSaga);
   }
   store: any = null;
   render() {

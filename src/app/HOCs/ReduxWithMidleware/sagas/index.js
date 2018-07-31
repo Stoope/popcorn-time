@@ -3,7 +3,7 @@ import type { Saga } from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import _flatten from 'lodash/flatten';
 
-import * as settings from './settings';
+import { settingsSagas } from '~/components/settings';
 
 const composeSagas = (...sagas) =>
   _flatten(
@@ -15,7 +15,7 @@ const composeSagas = (...sagas) =>
   );
 
 function* rootSaga(): Saga<void> {
-  yield all(composeSagas(settings));
+  yield all(composeSagas(settingsSagas));
 }
 
 export default rootSaga;

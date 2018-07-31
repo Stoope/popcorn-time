@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import { SettingsComponent } from './settings';
+import Button from '@material-ui/core/Button';
 
 class App extends React.Component<{}> {
   render() {
-    return <SettingsComponent />;
+    return <Button color="primary">Primary</Button>;
   }
 }
 
