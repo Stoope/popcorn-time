@@ -1,6 +1,7 @@
 // @flow
 import type { Action } from '../actions';
 import {
+  CHANGE_SETTINGS,
   SAVE_SETTINGS,
   SAVE_SETTINGS_SUCCESS,
   SAVE_SETTINGS_ERROR,
@@ -8,9 +9,15 @@ import {
   LOAD_SETTINGS_SUCCESS,
   LOAD_SETTINGS_ERROR
 } from '../constants';
+import merge from 'lodash/merge';
+import cloneDeep from 'lodash/cloneDeep';
 
+export type Theme = {
+  type?: 'light' | 'dark',
+  fontSize?: string
+};
 export type Config = {
-  type?: 'light' | 'dark'
+  theme?: Theme
 };
 export type State = {
   +config: Config,
@@ -20,7 +27,7 @@ export type State = {
 };
 
 const initialState: State = {
-  config: { type: 'dark' },
+  config: { theme: { type: 'dark', fontSize: '18px' } },
   isLoading: false,
   isSaving: false,
   error: null
@@ -28,10 +35,14 @@ const initialState: State = {
 
 const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
+    case CHANGE_SETTINGS:
+      return {
+        ...state,
+        config: cloneDeep(merge(state.config, action.payload)) // TODO
+      };
     case SAVE_SETTINGS:
       return {
         ...state,
-        config: { ...state.config, ...action.payload },
         isSaving: true
       };
     case SAVE_SETTINGS_SUCCESS:

@@ -27,6 +27,7 @@
     "@material-ui/core": "1.4.2",
     "babel-polyfill": "6.26.0",
     "lodash": "4.17.10",
+    "memoize-one": "4.0.0",
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "react-redux": "5.0.7",

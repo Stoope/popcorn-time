@@ -6,7 +6,8 @@ import {
   SAVE_SETTINGS_ERROR,
   LOAD_SETTINGS,
   LOAD_SETTINGS_SUCCESS,
-  LOAD_SETTINGS_ERROR
+  LOAD_SETTINGS_ERROR,
+  CHANGE_SETTINGS
 } from '../constants';
 
 type LoadSettings = { +type: typeof LOAD_SETTINGS };
@@ -18,7 +19,8 @@ type LoadSettingsError = {
   +type: typeof LOAD_SETTINGS_ERROR,
   payload: string
 };
-type SaveSettings = { +type: typeof SAVE_SETTINGS, payload: Config };
+type ChangeSettings = { +type: typeof CHANGE_SETTINGS, payload: Config };
+type SaveSettings = { +type: typeof SAVE_SETTINGS };
 type SaveSettingsSuccess = {
   +type: typeof SAVE_SETTINGS_SUCCESS
 };
@@ -33,11 +35,15 @@ export type Action =
   | SaveSettingsError
   | LoadSettings
   | LoadSettingsSuccess
-  | LoadSettingsError;
+  | LoadSettingsError
+  | ChangeSettings;
 
-export const saveSettings = (payload: Config): SaveSettings => ({
-  type: SAVE_SETTINGS,
+export const changeSettings = (payload: Config): ChangeSettings => ({
+  type: CHANGE_SETTINGS,
   payload
+});
+export const saveSettings = (): SaveSettings => ({
+  type: SAVE_SETTINGS
 });
 export const saveSettingsSuccess = (): SaveSettingsSuccess => ({
   type: SAVE_SETTINGS_SUCCESS

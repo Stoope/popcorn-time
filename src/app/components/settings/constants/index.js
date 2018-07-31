@@ -1,4 +1,7 @@
 // @flow
+export const CHANGE_SETTINGS: 'settings/CHANGE_SETTINGS' =
+  'settings/CHANGE_SETTINGS';
+
 export const SAVE_SETTINGS: 'settings/SAVE_SETTINGS' = 'settings/SAVE_SETTINGS';
 export const SAVE_SETTINGS_SUCCESS: 'settings/SAVE_SETTINGS_SUCCESS' =
   'settings/SAVE_SETTINGS_SUCCESS';
