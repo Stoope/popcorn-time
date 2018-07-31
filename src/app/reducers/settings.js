@@ -7,11 +7,11 @@ const initialState: State = {
 
 const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
-    case 'ADD_TODO':
-      return {
-        ...state,
-        value: 47
-      };
+    // case 'ADD_TODO':
+    //   return {
+    //     ...state,
+    //     value: 47
+    //   };
     default:
       return state;
   }

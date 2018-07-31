@@ -1,5 +1,5 @@
 // @flow
 import MaterialUI from './MaterialUI';
-import Redux from './Redux';
+import ReduxWithMidleware from './ReduxWithMidleware';
 
-export { MaterialUI, Redux };
+export { MaterialUI, ReduxWithMidleware };

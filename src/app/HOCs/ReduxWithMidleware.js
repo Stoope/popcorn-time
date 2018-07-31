@@ -6,7 +6,7 @@ import rootReducer from '../reducers';
 
 type Props = { children?: React.Node };
 
-class Redux extends React.Component<Props> {
+class ReduxWithMidleware extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     const middleware = [];
@@ -24,4 +24,4 @@ class Redux extends React.Component<Props> {
   }
 }
 
-export default Redux;
+export default ReduxWithMidleware;

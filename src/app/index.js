@@ -1,17 +1,17 @@
 // @flow
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { MaterialUI, Redux } from './HOCs';
+import { MaterialUI, ReduxWithMidleware } from './HOCs';
 import App from './components';
 
 class Component extends React.Component<{}> {
   render() {
     return (
-      <Redux>
+      <ReduxWithMidleware>
         <MaterialUI>
           <App />
         </MaterialUI>
-      </Redux>
+      </ReduxWithMidleware>
     );
   }
 }
