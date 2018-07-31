@@ -3,17 +3,20 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import 'typeface-roboto';
 import get from 'lodash/get';
-import isEqual from 'lodash/isEqual';
-import memoizeOne from 'memoize-one';
+import memoize from 'memoizee';
 
-const generateMuiTheme = memoizeOne(
+const generateMuiTheme = memoize(
   theme =>
     createMuiTheme({
       palette: {
         type: get(theme, 'type', 'light')
       }
     }),
-  isEqual
+  {
+    normalizer: function(args) {
+      return JSON.stringify(args[0]);
+    }
+  }
 );
 
 class MaterialUI extends React.Component {

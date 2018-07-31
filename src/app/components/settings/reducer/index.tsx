@@ -1,11 +1,11 @@
 import * as constants from '../constants';
-import merge from 'deepmerge';
+import * as merge from 'deepmerge';
 
 const initialState = {
   config: { theme: { type: 'dark', fontSize: '18px' } },
   isLoading: false,
   isSaving: false,
-  isSettingsOpenk: false,
+  isSettingsOpen: false,
   error: null
 };
 
