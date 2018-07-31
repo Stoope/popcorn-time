@@ -9,8 +9,7 @@ import {
   LOAD_SETTINGS_SUCCESS,
   LOAD_SETTINGS_ERROR
 } from '../constants';
-import merge from 'lodash/merge';
-import cloneDeep from 'lodash/cloneDeep';
+import merge from 'deepmerge';
 
 export type Theme = {
   type?: 'light' | 'dark',
@@ -38,7 +37,7 @@ const reducer = (state: State = initialState, action: Action): State => {
     case CHANGE_SETTINGS:
       return {
         ...state,
-        config: cloneDeep(merge(state.config, action.payload)) // TODO
+        config: merge(state.config, action.payload)
       };
     case SAVE_SETTINGS:
       return {
