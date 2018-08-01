@@ -24,7 +24,10 @@ const generateMuiTheme = memoize(
     }
   }
 );
-type Props = { config: State['settingsReducer']['config'] };
+type Props = {
+  config: State['settingsReducer']['config'];
+  children: React.ReactElement<any>;
+};
 
 class MaterialUI extends React.Component<Props, { muTheme: Theme }> {
   constructor(props: Props) {

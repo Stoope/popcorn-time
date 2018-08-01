@@ -10,9 +10,12 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
   }
 }
+type Props = {
+  children: React.ReactElement<any>;
+};
 
-class ReduxWithMidleware extends React.Component<{}> {
-  constructor(props: {}) {
+class ReduxWithMidleware extends React.Component<Props> {
+  constructor(props: Props) {
     super(props);
 
     const sagaMiddleware = createSagaMiddleware();
