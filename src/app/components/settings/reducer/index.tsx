@@ -1,11 +1,12 @@
 import * as constants from '../constants';
-import { State as GlobalState, Actions } from '~types';
+import { State as GlobalState, Actions } from 'types';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import merge from 'deepmerge';
 
 export type State = {
   readonly config: {
     readonly theme: ThemeOptions;
+    readonly locale?: 'en' | 'ru';
   };
   readonly isLoading: boolean;
   readonly isSaving: boolean;
@@ -14,7 +15,7 @@ export type State = {
 };
 
 const initialState: GlobalState['settingsReducer'] = {
-  config: { theme: { typography: { htmlFontSize: 16 } } },
+  config: { theme: { typography: { htmlFontSize: 16 } }, locale: 'en' },
   isLoading: false,
   isSaving: false,
   isSettingsOpen: false,

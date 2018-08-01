@@ -15,7 +15,7 @@ describe('actions', () => {
     expect(actions.openSettings()).toEqual(expectedAction);
   });
   it('should create an action CHANGE_SETTINGS', () => {
-    const payload = { theme: { fontSize: '18px' } };
+    const payload = { theme: {} };
     const expectedAction = {
       type: types.CHANGE_SETTINGS,
       payload
@@ -55,7 +55,7 @@ describe('actions', () => {
     expect(actions.loadSettings()).toEqual(expectedAction);
   });
   it('should create an action LOAD_SETTINGS_SUCCESS', () => {
-    const payload = { theme: { fontSize: '18px' } };
+    const payload = { theme: {} };
     const expectedAction = {
       type: types.LOAD_SETTINGS_SUCCESS,
       payload

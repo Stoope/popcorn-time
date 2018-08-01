@@ -10,7 +10,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/app/*"],
-      "~types": ["./src/app/HOCs/ReduxWithMidleware/reducers/index"]
+      "types": ["./src/app/HOCs/ReduxWithMidleware/reducers/index"],
+      "messages": ["./src/app/HOCs/ReactIntl/translations/messages"]
     },
     "esModuleInterop": true
   },

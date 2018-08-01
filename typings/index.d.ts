@@ -7,3 +7,5 @@ declare type DeepReadonly<T> = T extends (infer R)[]
 interface DeepReadonlyArray<T> extends ReadonlyArray<DeepReadonly<T>> {}
 
 type DeepReadonlyObject<T> = { readonly [P in keyof T]: DeepReadonly<T[P]> };
+
+declare module '*.json';

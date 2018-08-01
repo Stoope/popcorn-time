@@ -1,6 +1,6 @@
 import { action } from 'typesafe-actions';
 import * as constants from '../constants';
-import { State } from '~types';
+import { State } from 'types';
 
 export const closeSettings = () => action(constants.CLOSE_SETTINGS);
 export const openSettings = () => action(constants.OPEN_SETTINGS);

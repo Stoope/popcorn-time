@@ -4,7 +4,7 @@ import * as constants from '../constants';
 describe('settings reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: null })).toEqual({
-      config: { theme: { typography: { htmlFontSize: 16 } } },
+      config: { theme: { typography: { htmlFontSize: 16 } }, locale: 'en' },
       isLoading: false,
       isSaving: false,
       error: null,
@@ -81,7 +81,10 @@ describe('settings reducer', () => {
       reducer(
         {
           ...initialState,
-          config: { theme: { typography: { fontSize: 55, htmlFontSize: 55 } } }
+          config: {
+            theme: { typography: { fontSize: 55, htmlFontSize: 55 } },
+            locale: 'en'
+          }
         },
         {
           type: constants.CHANGE_SETTINGS,

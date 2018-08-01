@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import 'typeface-roboto';
 import get from 'lodash/get';
 import memoize from 'memoizee';
-import { State } from '~types';
+import { State } from 'types';
 
 const generateMuiTheme = memoize(
   (theme: State['settingsReducer']['config']['theme']) => createMuiTheme(theme),
