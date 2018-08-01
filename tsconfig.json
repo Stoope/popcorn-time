@@ -5,6 +5,7 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "ES6",
+    "typeRoots": ["./typings", "./node_modules/@types"],
     "jsx": "react",
     "baseUrl": ".",
     "paths": {

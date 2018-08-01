@@ -13,13 +13,7 @@ class App extends React.Component<{
       <Button
         onClick={() =>
           this.props.changeSettings({
-            theme: {
-              type:
-                this.props.config.theme &&
-                this.props.config.theme.type === 'light'
-                  ? 'dark'
-                  : 'light'
-            }
+            theme: { palette: { type: 'dark' }, typography: { fontSize: 50 } }
           })
         }
       >

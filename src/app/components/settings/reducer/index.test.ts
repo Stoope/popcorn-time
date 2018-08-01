@@ -4,7 +4,7 @@ import * as constants from '../constants';
 describe('settings reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: null })).toEqual({
-      config: { theme: { type: 'dark', fontSize: '18px' } },
+      config: { theme: {} },
       isLoading: false,
       isSaving: false,
       error: null,
@@ -30,10 +30,11 @@ describe('settings reducer', () => {
     ).toMatchObject({ error: testError });
   });
   it('should handle LOAD_SETTINGS_SUCCESS', () => {
-    const config = { theme: { fontSize: '55px' } };
+    const config = { theme: { typography: { fontSize: 55 } } };
+    const initialState = reducer(undefined, { type: null });
     expect(
       reducer(
-        { isLoading: true },
+        { ...initialState, isLoading: true },
         {
           type: constants.LOAD_SETTINGS_SUCCESS,
           payload: config
@@ -42,9 +43,10 @@ describe('settings reducer', () => {
     ).toMatchObject({ config: config, isLoading: false });
   });
   it('should handle SAVE_SETTINGS_SUCCESS', () => {
+    const initialState = reducer(undefined, { type: null });
     expect(
       reducer(
-        { isSaving: true },
+        { ...initialState, isSaving: true },
         {
           type: constants.SAVE_SETTINGS_SUCCESS
         }
@@ -52,9 +54,10 @@ describe('settings reducer', () => {
     ).toMatchObject({ isSaving: false });
   });
   it('should handle LOAD_SETTINGS', () => {
+    const initialState = reducer(undefined, { type: null });
     expect(
       reducer(
-        { isLoading: false },
+        { ...initialState, isLoading: false },
         {
           type: constants.LOAD_SETTINGS
         }
@@ -62,9 +65,10 @@ describe('settings reducer', () => {
     ).toMatchObject({ isLoading: true });
   });
   it('should handle SAVE_SETTINGS', () => {
+    const initialState = reducer(undefined, { type: null });
     expect(
       reducer(
-        { isSaving: false },
+        { ...initialState, isSaving: false },
         {
           type: constants.SAVE_SETTINGS
         }
@@ -72,15 +76,21 @@ describe('settings reducer', () => {
     ).toMatchObject({ isSaving: true });
   });
   it('should handle CHANGE_SETTINGS', () => {
+    const initialState = reducer(undefined, { type: null });
     expect(
       reducer(
-        { config: { theme: { fontSize: '18px', type: 'light' } } },
+        {
+          ...initialState,
+          config: { theme: { typography: { fontSize: 55, htmlFontSize: 55 } } }
+        },
         {
           type: constants.CHANGE_SETTINGS,
-          payload: { theme: { fontSize: '55px' } }
+          payload: { theme: { typography: { fontSize: 5 } } }
         }
       )
-    ).toMatchObject({ config: { theme: { fontSize: '55px', type: 'light' } } });
+    ).toMatchObject({
+      config: { theme: { typography: { fontSize: 5, htmlFontSize: 55 } } }
+    });
   });
   it('should handle OPEN_SETTINGS', () => {
     expect(
@@ -90,9 +100,13 @@ describe('settings reducer', () => {
     ).toMatchObject({ isSettingsOpen: true });
   });
   it('should handle CLOSE_SETTINGS', () => {
+    const initialState = reducer(undefined, { type: null });
     expect(
       reducer(
-        { isSettingsOpen: true },
+        {
+          ...initialState,
+          isSettingsOpen: true
+        },
         {
           type: constants.CLOSE_SETTINGS
         }

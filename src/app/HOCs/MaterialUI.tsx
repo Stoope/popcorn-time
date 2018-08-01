@@ -12,12 +12,7 @@ import memoize from 'memoizee';
 import { State } from '~types';
 
 const generateMuiTheme = memoize(
-  (theme: State['settingsReducer']['config']['theme']) =>
-    createMuiTheme({
-      palette: {
-        type: get(theme, 'type', 'light')
-      }
-    }),
+  (theme: State['settingsReducer']['config']['theme']) => createMuiTheme(theme),
   {
     normalizer: function(args) {
       return JSON.stringify(args[0]);
