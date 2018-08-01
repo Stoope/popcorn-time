@@ -1,9 +1,13 @@
-import * as React from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { changeSettings } from './actions';
+import { State } from '~types';
 
-class App extends React.Component {
+class App extends React.Component<{
+  config: State['settingsReducer']['config'];
+  changeSettings: typeof changeSettings;
+}> {
   render() {
     return (
       <Button
@@ -26,7 +30,7 @@ class App extends React.Component {
 }
 
 export default connect(
-  state => ({
+  (state: State) => ({
     config: state.settingsReducer.config
   }),
   { changeSettings }

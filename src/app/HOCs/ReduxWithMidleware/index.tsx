@@ -1,12 +1,18 @@
-import * as React from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
+import React from 'react';
+import { createStore, applyMiddleware, compose, Store } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers';
+import rootReducer, { State, Actions } from './reducers';
 import rootSaga from './sagas';
 
-class ReduxWithMidleware extends React.Component {
-  constructor(props) {
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
+  }
+}
+
+class ReduxWithMidleware extends React.Component<{}> {
+  constructor(props: {}) {
     super(props);
 
     const sagaMiddleware = createSagaMiddleware();
@@ -20,7 +26,7 @@ class ReduxWithMidleware extends React.Component {
     );
     sagaMiddleware.run(rootSaga);
   }
-  store = null;
+  store: Store<State, Actions> = null;
   render() {
     return <Provider store={this.store}>{this.props.children}</Provider>;
   }

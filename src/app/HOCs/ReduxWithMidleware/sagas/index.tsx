@@ -1,10 +1,12 @@
-import { all } from 'redux-saga/effects';
-import _flatten from 'lodash/flatten';
+import { all, ForkEffect } from 'redux-saga/effects';
+import flatten from 'lodash/flatten';
 
 import { settingsSagas } from '~/components/settings';
 
-const composeSagas = (...sagas) =>
-  _flatten(
+const composeSagas = (
+  ...sagas: { [key: string]: () => IterableIterator<ForkEffect> }[]
+) =>
+  flatten(
     sagas.map(saga => [
       ...Object.keys(saga)
         .filter(key => typeof saga[key] === 'function')
@@ -12,8 +14,6 @@ const composeSagas = (...sagas) =>
     ])
   );
 
-function* rootSaga() {
+export default function* rootSaga() {
   yield all(composeSagas(settingsSagas));
 }
-
-export default rootSaga;

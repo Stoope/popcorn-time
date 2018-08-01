@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { SettingsComponent } from './settings';
 
 class App extends React.Component {

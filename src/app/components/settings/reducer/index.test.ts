@@ -3,7 +3,7 @@ import * as constants from '../constants';
 
 describe('settings reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual({
+    expect(reducer(undefined, { type: null })).toEqual({
       config: { theme: { type: 'dark', fontSize: '18px' } },
       isLoading: false,
       isSaving: false,
@@ -30,15 +30,16 @@ describe('settings reducer', () => {
     ).toMatchObject({ error: testError });
   });
   it('should handle LOAD_SETTINGS_SUCCESS', () => {
+    const config = { theme: { fontSize: '55px' } };
     expect(
       reducer(
         { isLoading: true },
         {
           type: constants.LOAD_SETTINGS_SUCCESS,
-          payload: { test: 'TEST' }
+          payload: config
         }
       )
-    ).toMatchObject({ config: { test: 'TEST' }, isLoading: false });
+    ).toMatchObject({ config: config, isLoading: false });
   });
   it('should handle SAVE_SETTINGS_SUCCESS', () => {
     expect(
@@ -73,13 +74,13 @@ describe('settings reducer', () => {
   it('should handle CHANGE_SETTINGS', () => {
     expect(
       reducer(
-        { config: { test: { a: 5, b: 6 } } },
+        { config: { theme: { fontSize: '18px', type: 'light' } } },
         {
           type: constants.CHANGE_SETTINGS,
-          payload: { test: { b: 10 } }
+          payload: { theme: { fontSize: '55px' } }
         }
       )
-    ).toMatchObject({ config: { test: { a: 5, b: 10 } } });
+    ).toMatchObject({ config: { theme: { fontSize: '55px', type: 'light' } } });
   });
   it('should handle OPEN_SETTINGS', () => {
     expect(

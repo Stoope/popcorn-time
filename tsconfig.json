@@ -4,12 +4,14 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
-    "target": "es5",
+    "target": "ES6",
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/app/*"]
-    }
+      "~/*": ["./src/app/*"],
+      "~types": ["./src/app/HOCs/ReduxWithMidleware/reducers/index"]
+    },
+    "esModuleInterop": true
   },
   "include": ["./src/**/*"]
 }

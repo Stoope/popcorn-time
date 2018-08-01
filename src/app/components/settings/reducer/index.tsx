@@ -1,7 +1,21 @@
 import * as constants from '../constants';
-import * as merge from 'deepmerge';
+import { State as GlobalState, Actions } from '~types';
+import merge from 'deepmerge';
 
-const initialState = {
+export type State = {
+  readonly config?: {
+    readonly theme?: {
+      readonly type?: 'dark' | 'light';
+      readonly fontSize?: string;
+    };
+  };
+  readonly isLoading?: boolean;
+  readonly isSaving?: boolean;
+  readonly isSettingsOpen?: boolean;
+  readonly error?: string;
+};
+
+const initialState: GlobalState['settingsReducer'] = {
   config: { theme: { type: 'dark', fontSize: '18px' } },
   isLoading: false,
   isSaving: false,
@@ -9,7 +23,10 @@ const initialState = {
   error: null
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (
+  state: GlobalState['settingsReducer'] = initialState,
+  action: Actions
+): GlobalState['settingsReducer'] => {
   switch (action.type) {
     case constants.OPEN_SETTINGS:
       return {
