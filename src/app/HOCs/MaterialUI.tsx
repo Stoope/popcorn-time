@@ -4,6 +4,7 @@ import {
   createMuiTheme,
   Theme
 } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { connect } from 'react-redux';
 import 'typeface-roboto';
 import get from 'lodash/get';
@@ -40,7 +41,7 @@ class MaterialUI extends React.Component<Props, { muTheme: Theme }> {
   render() {
     return (
       <MuiThemeProvider theme={this.state.muTheme}>
-        {this.props.children}
+        <CssBaseline>{this.props.children}</CssBaseline>
       </MuiThemeProvider>
     );
   }
