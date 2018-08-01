@@ -1,19 +1,26 @@
 {
   "compilerOptions": {
-    "outDir": "./build/",
-    "sourceMap": true,
-    "noImplicitAny": true,
+    "outDir": "build",
     "module": "commonjs",
-    "target": "ES6",
-    "typeRoots": ["./typings", "./node_modules/@types"],
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "allowJs": true,
     "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "src",
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/app/*"],
       "types": ["./src/app/HOCs/ReduxWithMidleware/reducers/index"],
       "messages": ["./src/app/HOCs/ReactIntl/translations/messages"]
     },
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "esModuleInterop": true
   },
-  "include": ["./src/**/*"]
+  "exclude": ["node_modules", "build"],
+  "types": ["typePatches"]
 }
