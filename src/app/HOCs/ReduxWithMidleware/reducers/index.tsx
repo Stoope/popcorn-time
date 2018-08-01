@@ -6,7 +6,7 @@ import {
   settingsActions
 } from '~/components/settings';
 
-export type Actions = ActionType<typeof settingsActions>;
+export type Actions = ActionType<typeof settingsActions> | { type: null };
 export type State = { settingsReducer: SettingsState };
 
 const reducers = {

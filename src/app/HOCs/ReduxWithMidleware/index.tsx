@@ -15,6 +15,7 @@ type Props = {
 };
 
 class ReduxWithMidleware extends React.Component<Props> {
+  store: Store<State, Actions> | null = null;
   constructor(props: Props) {
     super(props);
 
@@ -24,13 +25,15 @@ class ReduxWithMidleware extends React.Component<Props> {
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     this.store = createStore(
       rootReducer,
-      undefined,
+      {},
       composeEnhancers(applyMiddleware(...middleware))
     );
     sagaMiddleware.run(rootSaga);
   }
-  store: Store<State, Actions> = null;
   render() {
+    if (this.store == null) {
+      return null;
+    }
     return <Provider store={this.store}>{this.props.children}</Provider>;
   }
 }

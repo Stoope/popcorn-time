@@ -3,14 +3,15 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { changeSettings } from './actions';
 import { State } from 'types';
-import { injectIntl, InjectedIntl } from 'react-intl';
+import { injectIntl, InjectedIntl, InjectedIntlProps } from 'react-intl';
 import messages from 'messages';
 
-class App extends React.Component<{
-  config: State['settingsReducer']['config'];
-  changeSettings: typeof changeSettings;
-  intl: InjectedIntl;
-}> {
+class App extends React.Component<
+  {
+    config: State['settingsReducer']['config'];
+    changeSettings: typeof changeSettings;
+  } & InjectedIntlProps
+> {
   render() {
     return (
       <Button
@@ -27,11 +28,9 @@ class App extends React.Component<{
   }
 }
 
-export default injectIntl(
-  connect(
-    (state: State) => ({
-      config: state.settingsReducer.config
-    }),
-    { changeSettings }
-  )(App)
-);
+export default connect(
+  (state: State) => ({
+    config: state.settingsReducer.config
+  }),
+  { changeSettings }
+)(injectIntl(App));
