@@ -4,6 +4,12 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import rootReducer, { State, Actions } from './reducers';
 import rootSaga from './sagas';
+import { createBrowserHistory, History } from 'history';
+import {
+  connectRouter,
+  routerMiddleware,
+  ConnectedRouter
+} from 'connected-react-router';
 
 declare global {
   interface Window {
@@ -16,15 +22,16 @@ type Props = {
 
 class ReduxWithMidleware extends React.Component<Props> {
   store: Store<State, Actions> | null = null;
+  history: History = createBrowserHistory();
   constructor(props: Props) {
     super(props);
 
     const sagaMiddleware = createSagaMiddleware();
-    const middleware = [sagaMiddleware];
+    const middleware = [routerMiddleware(this.history), sagaMiddleware];
     const composeEnhancers =
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     this.store = createStore(
-      rootReducer,
+      connectRouter(this.history)(rootReducer),
       {},
       composeEnhancers(applyMiddleware(...middleware))
     );
@@ -34,7 +41,13 @@ class ReduxWithMidleware extends React.Component<Props> {
     if (this.store == null) {
       return null;
     }
-    return <Provider store={this.store}>{this.props.children}</Provider>;
+    return (
+      <Provider store={this.store}>
+        <ConnectedRouter history={this.history}>
+          {this.props.children}
+        </ConnectedRouter>
+      </Provider>
+    );
   }
 }
 
