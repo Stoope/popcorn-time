@@ -95,8 +95,6 @@
     ]
   },
   "alias": {
-    "~": "./src/app",
-    "types": "./src/app/HOCs/ReduxWithMidleware/reducers/index",
-    "messages": "./src/app/HOCs/ReactIntl/translations/messages"
+    "~": "./src/app"
   }
 }

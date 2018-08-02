@@ -1,39 +1,45 @@
 import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-import { openSettings, closeSettings } from './actions';
+import * as settingsActions from '~/components/settings/actions';
+// import { settingsActions as ddd } from '~/components/settings';
 import { State } from 'types';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
-import messages from 'messages';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogHeader from './DialogHeader';
 import withMobileDialog, {
   InjectedProps
 } from '@material-ui/core/withMobileDialog';
 
 type Props = {
   isSettingsOpen: State['settingsReducer']['isSettingsOpen'];
-  openSettings: typeof openSettings;
-  closeSettings: typeof closeSettings;
-} & InjectedIntlProps &
-  InjectedProps;
+  openSettings: typeof settingsActions.openSettings;
+  closeSettings: typeof settingsActions.closeSettings;
+} & InjectedProps;
+
 class App extends React.Component<Props> {
   render() {
+    // console.log(ddd.openSettings);
+    const {
+      isSettingsOpen,
+      fullScreen,
+      openSettings,
+      closeSettings
+    } = this.props;
     return (
       <Fragment>
-        <Button onClick={this.props.openSettings}>
-          {this.props.intl.formatMessage(messages.settings_test)}
+        <Button onClick={openSettings}>
+          {'{intl.formatMessage(messages.settings_test)}'}
         </Button>
         <Dialog
-          open={this.props.isSettingsOpen}
-          onClose={this.props.closeSettings}
-          fullScreen={this.props.fullScreen}
+          open={isSettingsOpen}
+          onClose={closeSettings}
+          fullScreen={fullScreen}
           scroll="paper"
           aria-labelledby="scroll-dialog-title"
         >
-          <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
+          <DialogHeader closeSettings={closeSettings} />
           <DialogContent>
             <DialogContentText>
               Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
@@ -96,5 +102,8 @@ export default connect(
   (state: State) => ({
     isSettingsOpen: state.settingsReducer.isSettingsOpen
   }),
-  { openSettings, closeSettings }
-)(injectIntl<Props>(withMobileDialog<Props>()(App)));
+  {
+    openSettings: settingsActions.openSettings,
+    closeSettings: settingsActions.closeSettings
+  }
+)(withMobileDialog<Props>()(App));
