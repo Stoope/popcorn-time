@@ -9,18 +9,18 @@
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "~/*": ["./src/app/*"],
       "types": ["./src/app/HOCs/ReduxWithMidleware/reducers/index"],
       "messages": ["./src/app/HOCs/ReactIntl/translations/messages"]
     },
+    "typeRoots": ["./typings", "./node_modules/@types"],
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "build"],
-  "types": ["typePatches"]
+  "exclude": ["node_modules", "build"]
 }

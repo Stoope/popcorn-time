@@ -4,7 +4,7 @@ import flatten from 'lodash/flatten';
 import { settingsSagas } from '~/components/settings';
 
 const composeSagas = (
-  ...sagas: { [key: string]: () => IterableIterator<ForkEffect> }[]
+  ...sagas: Array<{ [key: string]: () => IterableIterator<ForkEffect> }>
 ) =>
   flatten(
     sagas.map(saga => [

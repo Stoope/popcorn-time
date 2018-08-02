@@ -11,8 +11,8 @@
     "start": "concurrently \"yarn parcel:dev\" \"yarn electron:dev\" \"yarn test:watch\"",
     "precommit": "lint-staged",
     "build": "rm -rf build/* && parcel build ./src/app/index.html -d build/ --public-url ./ && electron-builder",
-    "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test": "jest --config jest.config.json",
+    "test:watch": "npm test  --config jest.config.json --watch"
   },
   "build": {
     "appId": "popcorn.time",
@@ -73,7 +73,6 @@
     "prettier": "1.14.0",
     "ts-jest": "23.0.1",
     "tslint": "5.11.0",
-    "tslint-config-airbnb": "5.9.2",
     "tslint-react": "3.6.0",
     "typescript": "3.0.1"
   },
@@ -95,21 +94,5 @@
     "~": "./src/app",
     "types": "./src/app/HOCs/ReduxWithMidleware/reducers/index",
     "messages": "./src/app/HOCs/ReactIntl/translations/messages"
-  },
-  "jest": {
-    "verbose": true,
-    "testURL": "http://localhost/",
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   }
 }
