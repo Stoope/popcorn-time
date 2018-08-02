@@ -34,7 +34,7 @@ const SettingsHeader: React.SFC<Props> = ({
     <Typography variant="title">
       {intl.formatMessage(messages.settings_DialogHeader_title)}
     </Typography>
-    <IconButton color="inherit" onClick={closeSettings} aria-label="Close">
+    <IconButton onClick={closeSettings} aria-label="Close">
       <CloseIcon />
     </IconButton>
   </DialogTitle>
