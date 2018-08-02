@@ -1,7 +1,7 @@
 import React from 'react';
 import { settingsActions } from '~/components/settings';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import messages from './DialogHeader.messages';
+import messages from './index.messages';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,7 +21,7 @@ const styles: StyleRulesCallback = () => ({
   }
 });
 
-const DialogHeader: React.SFC<Props> = ({
+const SettingsHeader: React.SFC<Props> = ({
   intl,
   closeSettings,
   classes
@@ -40,4 +40,4 @@ const DialogHeader: React.SFC<Props> = ({
   </DialogTitle>
 );
 
-export default withStyles(styles)(injectIntl(DialogHeader));
+export default withStyles(styles)(injectIntl(SettingsHeader));

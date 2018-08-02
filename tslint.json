@@ -12,6 +12,7 @@
     "member-ordering": [true, { "order": "fields-first" }],
     "newline-before-return": false,
     "no-any": false,
+    "jsx-no-multiline-js": false,
     "no-empty-interface": false,
     "no-import-side-effect": false,
     "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
