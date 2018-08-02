@@ -12,7 +12,7 @@
     "precommit": "lint-staged",
     "build": "rm -rf build/* && parcel build ./src/app/index.html -d build/ --public-url ./ && electron-builder",
     "test": "jest --config jest.config.json",
-    "test:watch": "npm test  --config jest.config.json --watch"
+    "test:watch": "yarn jest --config jest.config.json --watch"
   },
   "build": {
     "appId": "popcorn.time",
