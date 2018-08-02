@@ -1,5 +1,5 @@
-import en from './en.json';
-import ru from './ru.json';
+import en from '~/locales/en.json';
+import ru from '~/locales/ru.json';
 
 const messages: { [key: string]: object } = {
   en,
