@@ -9,7 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

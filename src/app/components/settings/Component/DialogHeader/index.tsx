@@ -16,6 +16,7 @@ type Props = {
 const styles: StyleRulesCallback = () => ({
   dialogTitle: {
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'space-between'
   }
 });

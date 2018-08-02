@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-import * as settingsActions from '~/components/settings/actions';
-// import { settingsActions as ddd } from '~/components/settings';
+import { settingsActions } from '~/components/settings';
 import { State } from 'types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
