@@ -33,7 +33,6 @@ class App extends React.Component<Props> {
           open={isSettingsOpen}
           onClose={closeSettings}
           fullScreen={fullScreen}
-          scroll="paper"
           aria-labelledby="scroll-dialog-title"
         >
           <SettingsHeader closeSettings={closeSettings} />
