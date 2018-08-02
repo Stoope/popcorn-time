@@ -4,12 +4,12 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { connect } from 'react-redux';
 import { settingsActions } from '~/components/settings';
-import DialogContent from '@material-ui/core/DialogContent';
 import List from '@material-ui/core/List';
 import { State } from 'types';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
+import NightMode from './NightMode';
 
 type Props = {
   config: State['settingsReducer']['config'];
@@ -30,30 +30,35 @@ const styles: StyleRulesCallback = theme => ({
   },
   ul: {
     backgroundColor: 'inherit',
-    padding: 0
+    padding: 0,
+    listStyleType: 'none'
   }
 });
 
 const SettingsBody: React.SFC<Props> = ({
   changeSettings,
   intl,
-  classes
+  classes,
+  config
 }: Props) => (
   <List className={classes.root}>
-    {[0, 1, 2, 3, 4, 5, 6].map(sectionId => (
-      <li key={`section-${sectionId}`} className={classes.listSection}>
-        <ul className={classes.ul}>
-          <ListSubheader>
-            {intl.formatMessage(messages.settings_SettingsBody_appearance)}
-          </ListSubheader>
-          {[0, 1, 2, 3].map(item => (
-            <ListItem key={`item-${sectionId}-${item}`}>
-              <ListItemText primary={`Item ${item}`} />
-            </ListItem>
-          ))}
-        </ul>
-      </li>
-    ))}
+    <li className={classes.listSection}>
+      <ul className={classes.ul}>
+        <ListSubheader>
+          {intl.formatMessage(messages.settings_SettingsBody_appearance)}
+        </ListSubheader>
+        <NightMode changeSettings={changeSettings} theme={config.theme} />
+        <ListItem>
+          <ListItemText primary={`Item `} />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary={`Item `} />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary={`Item `} />
+        </ListItem>
+      </ul>
+    </li>
   </List>
 );
 

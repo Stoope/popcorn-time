@@ -30,6 +30,8 @@ class App extends React.Component<Props> {
           {'{intl.formatMessage(messages.settings_test)}'}
         </Button>
         <Dialog
+          // maxWidth="md"
+          fullWidth={true}
           open={isSettingsOpen}
           onClose={closeSettings}
           fullScreen={fullScreen}

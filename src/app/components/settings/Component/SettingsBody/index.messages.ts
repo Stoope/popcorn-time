@@ -5,6 +5,11 @@ const messages = defineMessages({
     id: 'app.SettingsBody.appearance',
     defaultMessage: 'Appearance',
     description: 'Appearance settings'
+  },
+  settings_SettingsBody_NightMode: {
+    id: 'app.SettingsBody.NightMode',
+    defaultMessage: 'Night mode',
+    description: 'Appearance theme night mode switch'
   }
 });
 
