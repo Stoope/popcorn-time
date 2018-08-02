@@ -1,26 +1,39 @@
 {
   "compilerOptions": {
-    "outDir": "build",
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["es6", "dom"],
-    "sourceMap": true,
-    "allowJs": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "rootDir": "src",
     "baseUrl": "./",
     "paths": {
-      "~/*": ["./src/app/*"],
-      "types": ["./src/app/HOCs/ReduxWithMidleware/reducers/index"],
-      "messages": ["./src/app/HOCs/ReactIntl/translations/messages"]
+      "~/*": ["src/app/*"],
+      "types": ["src/app/HOCs/ReduxWithMidleware/reducers/index"],
+      "messages": ["src/app/HOCs/ReactIntl/translations/messages"]
     },
-    "typeRoots": ["./typings", "./node_modules/@types"],
+    "outDir": "build/",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": true,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "typeRoots": ["src", "node_modules/@types"],
+    "jsx": "react",
+    "lib": ["dom", "es2016", "es2017.object"],
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "esModuleInterop": true
+    "noUnusedLocals": true,
+    "strict": true,
+    "pretty": true,
+    "removeComments": true,
+    "sourceMap": true
   },
-  "exclude": ["node_modules", "build"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/**/*.test.*"]
 }
