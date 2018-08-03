@@ -48,15 +48,6 @@ const SettingsBody: React.SFC<Props> = ({
           {intl.formatMessage(messages.settings_SettingsBody_appearance)}
         </ListSubheader>
         <NightMode changeSettings={changeSettings} theme={config.theme} />
-        <ListItem>
-          <ListItemText primary={`Item `} />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary={`Item `} />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary={`Item `} />
-        </ListItem>
       </ul>
     </li>
   </List>

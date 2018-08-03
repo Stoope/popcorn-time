@@ -8,18 +8,12 @@ export type State = {
     readonly theme: ThemeOptions;
     readonly locale?: 'en' | 'ru';
   };
-  readonly isLoading: boolean;
-  readonly isSaving: boolean;
   readonly isSettingsOpen: boolean;
-  readonly error: string | null;
 };
 
 const initialState: GlobalState['settingsReducer'] = {
   config: { theme: { typography: { htmlFontSize: 16 } }, locale: 'en' },
-  isLoading: false,
-  isSaving: false,
-  isSettingsOpen: false,
-  error: null
+  isSettingsOpen: false
 };
 
 const reducer = (
@@ -41,37 +35,6 @@ const reducer = (
       return {
         ...state,
         config: merge(state.config, action.payload)
-      };
-    case constants.SAVE_SETTINGS:
-      return {
-        ...state,
-        isSaving: true
-      };
-    case constants.SAVE_SETTINGS_SUCCESS:
-      return {
-        ...state,
-        isSaving: false
-      };
-    case constants.SAVE_SETTINGS_ERROR:
-      return {
-        ...state,
-        error: action.payload
-      };
-    case constants.LOAD_SETTINGS:
-      return {
-        ...state,
-        isLoading: true
-      };
-    case constants.LOAD_SETTINGS_SUCCESS:
-      return {
-        ...state,
-        config: action.payload,
-        isLoading: false
-      };
-    case constants.LOAD_SETTINGS_ERROR:
-      return {
-        ...state,
-        error: action.payload
       };
     default:
       return state;
