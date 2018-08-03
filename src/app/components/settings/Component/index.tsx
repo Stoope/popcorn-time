@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import Button from '@material-ui/core/Button';
+import React from 'react';
 import { connect } from 'react-redux';
 import { settingsActions } from '~/components/settings';
 import { State } from 'types';
@@ -18,29 +17,18 @@ type Props = {
 
 class App extends React.Component<Props> {
   render() {
-    const {
-      isSettingsOpen,
-      fullScreen,
-      openSettings,
-      closeSettings
-    } = this.props;
+    const { isSettingsOpen, fullScreen, closeSettings } = this.props;
     return (
-      <Fragment>
-        <Button onClick={openSettings}>
-          {'{intl.formatMessage(messages.settings_test)}'}
-        </Button>
-        <Dialog
-          // maxWidth="md"
-          fullWidth={true}
-          open={isSettingsOpen}
-          onClose={closeSettings}
-          fullScreen={fullScreen}
-          aria-labelledby="scroll-dialog-title"
-        >
-          <SettingsHeader closeSettings={closeSettings} />
-          <SettingsBody />
-        </Dialog>
-      </Fragment>
+      <Dialog
+        fullWidth={true}
+        open={isSettingsOpen}
+        onClose={closeSettings}
+        fullScreen={fullScreen}
+        aria-labelledby="scroll-dialog-title"
+      >
+        <SettingsHeader closeSettings={closeSettings} />
+        <SettingsBody />
+      </Dialog>
     );
   }
 }

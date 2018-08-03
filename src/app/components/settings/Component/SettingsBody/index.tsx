@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { settingsActions } from '~/components/settings';
 import List from '@material-ui/core/List';
 import { State } from 'types';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import NightMode from './NightMode';
 
@@ -60,4 +58,4 @@ export default connect(
   {
     changeSettings: settingsActions.changeSettings
   }
-)(withStyles(styles)(injectIntl(SettingsBody)));
+)(withStyles(styles, { withTheme: true })(injectIntl(SettingsBody)));
