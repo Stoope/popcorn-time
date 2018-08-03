@@ -22,10 +22,4 @@ describe('actions', () => {
     };
     expect(actions.changeSettings(payload)).toEqual(expectedAction);
   });
-  it('should create an action CLOSE_SETTINGS', () => {
-    const expectedAction = {
-      type: types.CLOSE_SETTINGS
-    };
-    expect(actions.closeSettings()).toEqual(expectedAction);
-  });
 });

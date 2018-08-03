@@ -15,7 +15,7 @@ type Props = {
   closeSettings: typeof settingsActions.closeSettings;
 } & InjectedProps;
 
-class App extends React.Component<Props> {
+class SettingsComponent extends React.Component<Props> {
   render() {
     const { isSettingsOpen, fullScreen, closeSettings } = this.props;
     return (
@@ -41,4 +41,4 @@ export default connect(
     openSettings: settingsActions.openSettings,
     closeSettings: settingsActions.closeSettings
   }
-)(withMobileDialog<Props>()(App));
+)(withMobileDialog<Props>()(SettingsComponent));

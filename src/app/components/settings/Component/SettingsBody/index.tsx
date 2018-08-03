@@ -58,4 +58,4 @@ export default connect(
   {
     changeSettings: settingsActions.changeSettings
   }
-)(withStyles(styles, { withTheme: true })(injectIntl(SettingsBody)));
+)(withStyles(styles)(injectIntl(SettingsBody)));
