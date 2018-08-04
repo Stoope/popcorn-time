@@ -23,7 +23,7 @@ type Props = {
 class ReduxWithMidleware extends React.Component<Props> {
   store: Store<State, Actions>;
   persistConfig = {
-    key: 'root',
+    key: 'config',
     storage: electronStoreStorage,
     whitelist: ['settingsReducer'],
     stateReconciler: deepStateReconciler,
