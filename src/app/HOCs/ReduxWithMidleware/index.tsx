@@ -4,17 +4,11 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import rootReducer, { State, Actions } from './reducers';
 import rootSaga from './sagas';
-import { createBrowserHistory, History } from 'history';
 import { persistStore, persistReducer, Persistor } from 'redux-persist';
 import { createWhitelistFilter } from 'redux-persist-transform-filter';
 import { PersistGate } from 'redux-persist/integration/react';
 import electronStoreStorage from './electron-store-storage';
 import deepStateReconciler from './deep-state-reconciler';
-import {
-  connectRouter,
-  routerMiddleware,
-  ConnectedRouter
-} from 'connected-react-router';
 
 declare global {
   interface Window {
@@ -28,7 +22,6 @@ type Props = {
 
 class ReduxWithMidleware extends React.Component<Props> {
   store: Store<State, Actions>;
-  history: History = createBrowserHistory();
   persistConfig = {
     key: 'root',
     storage: electronStoreStorage,
@@ -41,14 +34,11 @@ class ReduxWithMidleware extends React.Component<Props> {
     super(props);
 
     const sagaMiddleware = createSagaMiddleware();
-    const middleware = [routerMiddleware(this.history), sagaMiddleware];
+    const middleware = [sagaMiddleware];
     const composeEnhancers =
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     this.store = createStore(
-      persistReducer(
-        this.persistConfig,
-        connectRouter(this.history)(rootReducer)
-      ),
+      persistReducer(this.persistConfig, rootReducer),
       {},
       composeEnhancers(applyMiddleware(...middleware))
     );
@@ -59,9 +49,7 @@ class ReduxWithMidleware extends React.Component<Props> {
     return (
       <Provider store={this.store}>
         <PersistGate loading={null} persistor={this.persistor}>
-          <ConnectedRouter history={this.history}>
-            {this.props.children}
-          </ConnectedRouter>
+          {this.props.children}
         </PersistGate>
       </Provider>
     );

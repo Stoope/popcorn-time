@@ -2,6 +2,8 @@ import React from 'react';
 import { SettingsComponent } from './settings';
 import { DrawerComponent } from './drawer';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 const styles: StyleRulesCallback = theme => ({
   root: {
@@ -26,15 +28,21 @@ class App extends React.Component<Props> {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <DrawerComponent />
-        <main className={classes.content}>
-          {'<Typography noWrap>dsdsds</Typography>'}
-        </main>
-        <SettingsComponent />
-      </div>
+      <HashRouter>
+        <div className={classes.root}>
+          <DrawerComponent />
+          <main className={classes.content}>
+            <Switch>
+              <Route exact={true} path="/" render={() => <div>Match</div>} />
+              <Route path="/series" render={() => <div>series</div>} />
+              <Route render={() => <div>Miss</div>} />
+            </Switch>
+          </main>
+          <SettingsComponent />
+        </div>
+      </HashRouter>
     );
   }
 }
 
-export default withStyles(styles, { withTheme: true })(App);
+export default withRouter(withStyles(styles)(App));

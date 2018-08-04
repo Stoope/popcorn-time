@@ -2,29 +2,25 @@ import React from 'react';
 import messages from './index.messages';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { settingsActions } from '~/components/settings';
-import { State } from 'types';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Switch from '@material-ui/core/Switch';
 import Brightness2 from '@material-ui/icons/Brightness2';
-import get from 'lodash/get';
+import { WithTheme, withTheme } from '@material-ui/core/styles';
 
 type Props = {
-  theme: State['settingsReducer']['config']['theme'];
   changeSettings: typeof settingsActions.changeSettings;
-} & InjectedIntlProps;
+} & InjectedIntlProps &
+  WithTheme;
 
 class NightMode extends React.Component<Props> {
   changeSettings = () => {
     this.props.changeSettings({
       theme: {
         palette: {
-          type:
-            get(this.props.theme, 'palette.type', 'light') === 'dark'
-              ? 'light'
-              : 'dark'
+          type: this.props.theme.palette.type === 'dark' ? 'light' : 'dark'
         }
       }
     });
@@ -42,7 +38,7 @@ class NightMode extends React.Component<Props> {
         <ListItemSecondaryAction>
           <Switch
             onChange={this.changeSettings}
-            checked={get(theme, 'palette.type', 'light') === 'dark'}
+            checked={theme.palette.type === 'dark'}
           />
         </ListItemSecondaryAction>
       </ListItem>
@@ -50,4 +46,4 @@ class NightMode extends React.Component<Props> {
   }
 }
 
-export default injectIntl(NightMode);
+export default injectIntl(withTheme()(NightMode));

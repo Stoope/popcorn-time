@@ -5,6 +5,11 @@ const messages = defineMessages({
     id: 'app.Drawer.settings',
     defaultMessage: 'Settings',
     description: 'Application settings in drawer menu'
+  },
+  drawer_Drawer_series: {
+    id: 'app.Drawer.series',
+    defaultMessage: 'Series',
+    description: 'Series item in application drawer'
   }
 });
 
