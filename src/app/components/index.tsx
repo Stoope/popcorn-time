@@ -33,6 +33,7 @@ class App extends React.Component<Props> {
           <Switch>
             <Route exact={true} path="/" render={() => <div>Match</div>} />
             <Route path="/series" render={() => <div>series</div>} />
+            <Route path="/movies" render={() => <div>movies</div>} />
             <Route render={() => <div>Miss</div>} />
           </Switch>
         </main>

@@ -9,6 +9,7 @@ import List from '@material-ui/core/List';
 import Header from './Header';
 import Settings from './Settings';
 import Shows from './Shows';
+import Movies from './Movies';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 const drawerWidth = 240;
@@ -66,6 +67,11 @@ class DrawerComponent extends React.Component<Props> {
         <Header />
         <Divider />
         <List className={classes.list}>
+          <Movies
+            location={location}
+            navigateTo={this.navigateTo}
+            activeItemClassName={classes.activeItem}
+          />
           <Shows
             location={location}
             navigateTo={this.navigateTo}

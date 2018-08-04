@@ -10,6 +10,11 @@ const messages = defineMessages({
     id: 'app.Drawer.series',
     defaultMessage: 'Series',
     description: 'Series item in application drawer'
+  },
+  drawer_Drawer_movies: {
+    id: 'app.Drawer.movies',
+    defaultMessage: 'Movies',
+    description: 'Movies item in application drawer'
   }
 });
 
