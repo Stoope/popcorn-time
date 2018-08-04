@@ -4,7 +4,30 @@ import * as constants from '../constants';
 describe('settings reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: null })).toEqual({
-      config: { theme: { typography: { htmlFontSize: 16 } }, locale: 'en' },
+      config: {
+        theme: { typography: { htmlFontSize: 16 } },
+        locale: 'en',
+        proxy: false,
+        series: {
+          APIs: [
+            {
+              url: 'http://eztv.is/api/'
+            },
+            {
+              url: 'https://api-fetch.website/tv/'
+            },
+            {
+              url: 'https://eztvapi.ml/'
+            },
+            {
+              url: 'https://popcorntime.ws/api/eztv/'
+            },
+            {
+              url: 'https://popcorntimece.ch/api/eztv/'
+            }
+          ]
+        }
+      },
       isSettingsOpen: false
     });
   });
@@ -15,28 +38,8 @@ describe('settings reducer', () => {
         {
           ...initialState,
           config: {
-            theme: { typography: { htmlFontSize: 16 } },
-            locale: 'en',
-            series: {
-              APIs: [
-                {
-                  url: 'http://eztv.is/api/'
-                },
-                {
-                  url: 'https://api-fetch.website/tv/'
-                },
-                {
-                  url: 'https://eztvapi.ml/'
-                },
-                {
-                  url: 'https://popcorntime.ws/api/eztv/'
-                },
-                {
-                  url: 'https://popcorntimece.ch/api/eztv/'
-                }
-              ]
-            },
-            proxy: false
+            ...initialState.config,
+            theme: { typography: { htmlFontSize: 16 } }
           }
         },
         {
@@ -45,7 +48,7 @@ describe('settings reducer', () => {
         }
       )
     ).toMatchObject({
-      config: { theme: { typography: { fontSize: 5, htmlFontSize: 55 } } }
+      config: { theme: { typography: { fontSize: 5, htmlFontSize: 16 } } }
     });
   });
   it('should handle OPEN_SETTINGS', () => {
