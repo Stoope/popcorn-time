@@ -2,7 +2,7 @@ import React from 'react';
 import { SettingsComponent } from './settings';
 import { DrawerComponent } from './drawer';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
-import { Route, Switch, withRouter } from 'react-router';
+import { Route, Switch } from 'react-router';
 
 const styles: StyleRulesCallback = theme => ({
   root: {
