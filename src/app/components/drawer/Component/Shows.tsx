@@ -17,7 +17,6 @@ class Shows extends React.Component<Props> {
   navigateToSeries = () => this.props.history.push(this.componentPathName);
   render() {
     const { intl, activeItemClassName, location } = this.props;
-    console.log(this.props);
     return (
       <ListItem
         button={true}
