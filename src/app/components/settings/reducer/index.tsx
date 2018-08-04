@@ -34,7 +34,7 @@ const reducer = (
     case constants.CHANGE_SETTINGS:
       return {
         ...state,
-        config: merge(state.config, action.payload)
+        config: merge(state.config, action.payload, { arrayMerge: (destination, source) => source })
       };
     default:
       return state;
