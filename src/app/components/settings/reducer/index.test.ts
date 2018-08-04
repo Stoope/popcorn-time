@@ -15,8 +15,27 @@ describe('settings reducer', () => {
         {
           ...initialState,
           config: {
-            theme: { typography: { fontSize: 55, htmlFontSize: 55 } },
-            locale: 'en'
+            theme: { typography: { htmlFontSize: 16 } },
+            locale: 'en',
+            series: {
+              APIs: [
+                {
+                  url: 'http://eztv.is/api/'
+                },
+                {
+                  url: 'https://api-fetch.website/tv/'
+                },
+                {
+                  url: 'https://eztvapi.ml/'
+                },
+                {
+                  url: 'https://popcorntime.ws/api/eztv/'
+                },
+                {
+                  url: 'https://popcorntimece.ch/api/eztv/'
+                }
+              ]
+            }
           }
         },
         {
