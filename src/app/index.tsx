@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MaterialUI, ReduxWithMidleware, ReactIntl } from '~/HOCs';
+import { MaterialUI, ReduxWithMidleware, ReactIntl, ReactRouter } from '~/HOCs';
 import App from '~/components';
 import './index.css';
 
@@ -11,7 +11,9 @@ class Component extends React.Component<{}, {}> {
       <ReduxWithMidleware>
         <ReactIntl>
           <MaterialUI>
-            <App />
+            <ReactRouter>
+              <App />
+            </ReactRouter>
           </MaterialUI>
         </ReactIntl>
       </ReduxWithMidleware>

@@ -9,12 +9,13 @@ import { RouteComponentProps } from 'react-router';
 
 type Props = {
   activeItemClassName: string;
-} & InjectedIntlProps &
-  RouteComponentProps<{}>;
+  navigateTo: (pathName: string) => void;
+  location: RouteComponentProps<{}>['location'];
+} & InjectedIntlProps;
 
 class Shows extends React.Component<Props> {
   componentPathName = '/series';
-  navigateToSeries = () => this.props.history.push(this.componentPathName);
+  navigateToSeries = () => this.props.navigateTo(this.componentPathName);
   render() {
     const { intl, activeItemClassName, location } = this.props;
     return (
