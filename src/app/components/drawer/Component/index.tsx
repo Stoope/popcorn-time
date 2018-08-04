@@ -50,7 +50,7 @@ const styles: StyleRulesCallback = theme => ({
 });
 
 class DrawerComponent extends React.Component<Props> {
-  navigateTo = (pathName: string) => this.props.history.push(pathName);
+  navigateTo = (pathName: string) => this.props.history.replace(pathName);
   render() {
     const { isDrawerOpen, classes, location } = this.props;
     return (
