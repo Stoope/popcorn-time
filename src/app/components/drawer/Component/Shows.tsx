@@ -5,7 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import LiveTv from '@material-ui/icons/LiveTv';
 import ListItemText from '@material-ui/core/ListItemText';
-import { withRouter, RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 
 type Props = {
   activeItemClassName: string;
@@ -38,4 +38,4 @@ class Shows extends React.Component<Props> {
   }
 }
 
-export default withRouter(injectIntl(Shows));
+export default injectIntl(Shows);

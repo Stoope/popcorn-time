@@ -9,13 +9,14 @@ import List from '@material-ui/core/List';
 import Header from './Header';
 import Settings from './Settings';
 import Shows from './Shows';
+import { RouteComponentProps } from 'react-router';
 
 const drawerWidth = 240;
 
 type Props = {
   isDrawerOpen: State['drawerReducer']['isDrawerOpen'];
   classes: Record<string, string>;
-};
+} & RouteComponentProps<{}>;
 
 const styles: StyleRulesCallback = theme => ({
   drawerPaper: {
@@ -49,7 +50,7 @@ const styles: StyleRulesCallback = theme => ({
 
 class DrawerComponent extends React.Component<Props> {
   render() {
-    const { isDrawerOpen, classes } = this.props;
+    const { isDrawerOpen, classes, ...props } = this.props;
     return (
       <Drawer
         variant="permanent"
@@ -64,7 +65,7 @@ class DrawerComponent extends React.Component<Props> {
         <Header />
         <Divider />
         <List className={classes.list}>
-          <Shows activeItemClassName={classes.activeItem} />
+          <Shows activeItemClassName={classes.activeItem} {...props} />
           <Divider />
           <Settings activeItemClassName={classes.activeItem} />
         </List>
