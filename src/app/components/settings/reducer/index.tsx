@@ -2,11 +2,13 @@ import * as constants from '../constants';
 import { State as GlobalState, Actions } from 'types';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import merge from 'deepmerge';
+import { AxiosProxyConfig } from 'axios';
 
 export type State = {
   readonly config: {
     readonly theme: ThemeOptions;
     readonly locale?: 'en' | 'ru';
+    readonly proxy: AxiosProxyConfig | false;
     readonly series: {
       APIs: Array<{ url: string }>;
     };
@@ -18,6 +20,7 @@ const initialState: GlobalState['settingsReducer'] = {
   config: {
     theme: { typography: { htmlFontSize: 16 } },
     locale: 'en',
+    proxy: false,
     series: {
       APIs: [
         {

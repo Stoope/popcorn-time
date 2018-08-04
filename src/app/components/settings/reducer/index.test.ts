@@ -35,7 +35,8 @@ describe('settings reducer', () => {
                   url: 'https://popcorntimece.ch/api/eztv/'
                 }
               ]
-            }
+            },
+            proxy: false
           }
         },
         {
