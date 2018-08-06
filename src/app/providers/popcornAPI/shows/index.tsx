@@ -74,12 +74,10 @@ type SerieDetails = {
     hated: number;
   };
 };
-var wait = ms => new Promise((r, j) => setTimeout(r, ms));
 const shows = {
   getPages: async (
     proxy: AxiosProxyConfig | false = false
   ): Promise<string[]> => {
-    await wait(2000);
     const result = await axios.get(`${baseUrl}/shows`, { proxy });
     return result.data;
   },
