@@ -12,8 +12,6 @@ import Shows from './Shows';
 import Movies from './Movies';
 import { RouteComponentProps, withRouter } from 'react-router';
 
-const drawerWidth = 240;
-
 type Props = {
   isDrawerOpen: State['drawerReducer']['isDrawerOpen'];
   classes: Record<string, string>;
@@ -23,7 +21,8 @@ const styles: StyleRulesCallback = theme => ({
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
+    width: '100%',
+    overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
@@ -34,7 +33,6 @@ const styles: StyleRulesCallback = theme => ({
     paddingBottom: 0
   },
   drawerPaperClose: {
-    overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
