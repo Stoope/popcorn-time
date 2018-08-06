@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { State } from 'types';
 import { seriesActions } from '~/components/series';
 import InfiniteScroll from 'react-infinite-scroller';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 type Props = {
+  hasMore: State['seriesReducer']['hasMore'];
+  data: State['seriesReducer']['data'];
   seriesReducer: State['seriesReducer'];
   resetSeries: typeof seriesActions.resetSeries;
   loadSeries: typeof seriesActions.loadSeries;
@@ -15,15 +18,12 @@ class DrawerComponent extends React.Component<Props> {
     this.props.resetSeries();
   }
   render() {
-    const {
-      seriesReducer: { hasMore, data },
-      loadSeries
-    } = this.props;
+    const { hasMore, data, loadSeries } = this.props;
     return (
       <InfiniteScroll
         loadMore={loadSeries}
         hasMore={hasMore}
-        loader={<div key={0}>загрузка...</div>}
+        loader={<LinearProgress key={0} />}
         useWindow={false}
       >
         {data.map(item => (
@@ -47,7 +47,8 @@ class DrawerComponent extends React.Component<Props> {
 
 export default connect(
   (state: State) => ({
-    seriesReducer: state.seriesReducer
+    hasMore: state.seriesReducer.hasMore,
+    data: state.seriesReducer.data
   }),
   {
     resetSeries: seriesActions.resetSeries,

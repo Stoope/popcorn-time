@@ -85,8 +85,7 @@ const reducer = (
       return {
         ...state,
         isLoading: true,
-        error: null,
-        hasMore: false
+        error: null
       };
     case constants.RESET_SERIES:
       return {
