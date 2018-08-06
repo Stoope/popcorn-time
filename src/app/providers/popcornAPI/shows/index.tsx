@@ -89,7 +89,7 @@ const shows = {
     return { total: result.data.totalShows, updated: result.data.updated };
   },
   getPage: async (
-    { page, ...filter }: Filter,
+    { page = 1, ...filter }: Filter,
     proxy: AxiosProxyConfig | false = false
   ): Promise<Serie[]> => {
     const result = await axios.get(

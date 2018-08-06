@@ -1,6 +1,7 @@
 import React from 'react';
 import { SettingsComponent } from './settings';
 import { DrawerComponent } from './drawer';
+import { SeriesComponent } from './series';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import { Route, Switch } from 'react-router';
 
@@ -32,7 +33,7 @@ class App extends React.Component<Props> {
         <main className={classes.content}>
           <Switch>
             <Route exact={true} path="/" render={() => <div>Match</div>} />
-            <Route path="/series" render={() => <div>series</div>} />
+            <Route path="/series" component={SeriesComponent} />
             <Route path="/movies" render={() => <div>movies</div>} />
             <Route render={() => <div>Miss</div>} />
           </Switch>

@@ -1,7 +1,7 @@
 import shows from './shows';
 
 export type Filter = {
-  page: number;
+  page?: number;
   sort?: 'name' | 'rating' | 'trending' | 'updated' | 'year';
   order?: 1 | -1;
   genre?:
