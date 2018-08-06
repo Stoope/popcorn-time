@@ -1,7 +1,7 @@
 import { all, ForkEffect } from 'redux-saga/effects';
 import flatten from 'lodash/flatten';
 
-// import { settingsSagas } from '~/components/settings';
+import { seriesSagas } from '~/components/series';
 
 const composeSagas = (
   ...sagas: Array<{ [key: string]: () => IterableIterator<ForkEffect> }>
@@ -15,8 +15,5 @@ const composeSagas = (
   );
 
 export default function* rootSaga() {
-  yield all(
-    composeSagas()
-    // settingsSagas
-  );
+  yield all(composeSagas(seriesSagas));
 }

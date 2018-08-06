@@ -6,12 +6,12 @@ describe('series reducer', () => {
     expect(reducer(undefined, { type: null })).toEqual({
       isLoading: false,
       filter: {
-        page: 1,
         sort: 'rating',
         order: -1
       },
       data: [],
-      error: null
+      error: null,
+      hasMore: false
     });
   });
   it('should handle LOAD_SERIES', () => {
@@ -20,20 +20,22 @@ describe('series reducer', () => {
         {
           isLoading: false,
           filter: {
-            page: 1,
             sort: 'name',
             order: -1
           },
           data: [],
-          error: 'ERROR'
+          error: 'ERROR',
+          hasMore: false
         },
         {
-          type: constants.LOAD_SERIES
+          type: constants.LOAD_SERIES,
+          payload: 10
         }
       )
     ).toMatchObject({
       isLoading: true,
-      error: null
+      error: null,
+      hasMore: false
     });
   });
   it('should handle RESET_SERIES', () => {
@@ -42,12 +44,12 @@ describe('series reducer', () => {
         {
           isLoading: false,
           filter: {
-            page: 1,
             sort: 'name',
             order: -1
           },
           data: [],
-          error: 'ERROR'
+          error: 'ERROR',
+          hasMore: false
         },
         {
           type: constants.RESET_SERIES
@@ -56,12 +58,12 @@ describe('series reducer', () => {
     ).toEqual({
       isLoading: false,
       filter: {
-        page: 1,
         sort: 'rating',
         order: -1
       },
       data: [],
-      error: null
+      error: null,
+      hasMore: false
     });
   });
   it('should handle LOAD_SERIES_SUCCESS', () => {
@@ -121,10 +123,14 @@ describe('series reducer', () => {
         },
         {
           type: constants.LOAD_SERIES_SUCCESS,
-          payload: series
+          payload: { series, hasMore: true }
         }
       )
-    ).toMatchObject({ isLoading: false, data: series });
+    ).toMatchObject({
+      isLoading: false,
+      data: series,
+      hasMore: true
+    });
   });
   it('should handle LOAD_SERIES_SUCCESS add to exist data', () => {
     const existSeries = [
@@ -181,19 +187,25 @@ describe('series reducer', () => {
         {
           isLoading: false,
           filter: {
-            page: 1,
             sort: 'rating',
             order: -1
           },
           data: [...existSeries],
-          error: null
+          error: null,
+          hasMore: false
         },
         {
           type: constants.LOAD_SERIES_SUCCESS,
-          payload: series
+          payload: {
+            series,
+            hasMore: true
+          }
         }
       )
-    ).toMatchObject({ data: [...existSeries, ...series] });
+    ).toMatchObject({
+      data: [...existSeries, ...series],
+      hasMore: true
+    });
   });
   it('should handle LOAD_SERIES_SUCCESS remove duplicates', () => {
     const existSeries = [
@@ -271,16 +283,19 @@ describe('series reducer', () => {
         {
           isLoading: false,
           filter: {
-            page: 1,
             sort: 'rating',
             order: -1
           },
           data: [...existSeries],
-          error: null
+          error: null,
+          hasMore: false
         },
         {
           type: constants.LOAD_SERIES_SUCCESS,
-          payload: series
+          payload: {
+            series,
+            hasMore: true
+          }
         }
       )
     ).toMatchObject({
@@ -310,17 +325,57 @@ describe('series reducer', () => {
           }
         },
         ...series
-      ]
+      ],
+      hasMore: true
     });
   });
   it('should handle LOAD_SERIES_ERROR', () => {
     const error = 'ERROR';
     expect(
-      reducer(undefined, {
-        type: constants.LOAD_SERIES_ERROR,
-        payload: error
-      })
-    ).toMatchObject({ error });
+      reducer(
+        {
+          isLoading: false,
+          filter: {
+            sort: 'rating',
+            order: -1
+          },
+          data: [
+            {
+              _id: 'tt4272070',
+              imdb_id: 'tt4272070',
+              tvdb_id: '287572',
+              title: `Fast N' Loud: Demolition TheaterNEW`,
+              year: '2014',
+              slug: 'fast-n-loud-demolition-theater',
+              num_seasons: 1,
+              images: {
+                poster: 'http://thetvdb.com/banners/posters/287572-1.jpg',
+                fanart:
+                  'http://thetvdb.com/banners/fanart/original/287572-1.jpg',
+                banner: 'http://thetvdb.com/banners/graphical/287572-g.jpg'
+              },
+              rating: {
+                percentage: 100,
+                watching: 0,
+                votes: 4,
+                loved: 100,
+                hated: 100
+              }
+            }
+          ],
+          error: null,
+          hasMore: true
+        },
+        {
+          type: constants.LOAD_SERIES_ERROR,
+          payload: error
+        }
+      )
+    ).toMatchObject({
+      error,
+      data: [],
+      hasMore: false
+    });
   });
   it('should handle CHANGE_SERIES_FILTER', () => {
     const filter = { keywords: 'SHOW', page: 10 };
@@ -329,12 +384,35 @@ describe('series reducer', () => {
         {
           isLoading: false,
           filter: {
-            page: 1,
             sort: 'rating',
             order: -1
           },
-          data: [],
-          error: null
+          data: [
+            {
+              _id: 'tt4272070',
+              imdb_id: 'tt4272070',
+              tvdb_id: '287572',
+              title: `Fast N' Loud: Demolition TheaterNEW`,
+              year: '2014',
+              slug: 'fast-n-loud-demolition-theater',
+              num_seasons: 1,
+              images: {
+                poster: 'http://thetvdb.com/banners/posters/287572-1.jpg',
+                fanart:
+                  'http://thetvdb.com/banners/fanart/original/287572-1.jpg',
+                banner: 'http://thetvdb.com/banners/graphical/287572-g.jpg'
+              },
+              rating: {
+                percentage: 100,
+                watching: 0,
+                votes: 4,
+                loved: 100,
+                hated: 100
+              }
+            }
+          ],
+          error: null,
+          hasMore: false
         },
         {
           type: constants.CHANGE_SERIES_FILTER,
@@ -346,7 +424,8 @@ describe('series reducer', () => {
         page: 10,
         keywords: 'SHOW',
         order: -1
-      }
+      },
+      data: []
     });
   });
 });

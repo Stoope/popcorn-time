@@ -12,5 +12,8 @@
       "tsConfigFile": "./tsconfig.json"
     }
   },
-  "setupFiles": ["./jest.stubs.js"]
+  "setupFiles": ["./jest.stubs.js"],
+  "moduleNameMapper": {
+    "~(.*)$": "<rootDir>/src/app/$1"
+  }
 }

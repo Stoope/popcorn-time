@@ -4,9 +4,10 @@ import * as types from '../constants';
 describe('actions', () => {
   it('should create an action LOAD_SERIES', () => {
     const expectedAction = {
-      type: types.LOAD_SERIES
+      type: types.LOAD_SERIES,
+      payload: 10
     };
-    expect(actions.loadSeries()).toEqual(expectedAction);
+    expect(actions.loadSeries(10)).toEqual(expectedAction);
   });
   it('should create an action LOAD_SERIES_SUCCESS', () => {
     const series = [
@@ -58,9 +59,11 @@ describe('actions', () => {
     ];
     const expectedAction = {
       type: types.LOAD_SERIES_SUCCESS,
-      payload: series
+      payload: { series, hasMore: false }
     };
-    expect(actions.loadSeriesSuccess(series)).toEqual(expectedAction);
+    expect(actions.loadSeriesSuccess({ series, hasMore: false })).toEqual(
+      expectedAction
+    );
   });
   it('should create an action LOAD_SERIES_ERROR', () => {
     const error = 'error';
@@ -71,7 +74,7 @@ describe('actions', () => {
     expect(actions.loadSeriesError(error)).toEqual(expectedAction);
   });
   it('should create an action CHANGE_SERIES_FILTER', () => {
-    const filter = { page: 10 };
+    const filter = { keywords: 'AAA' };
     const expectedAction = {
       type: types.CHANGE_SERIES_FILTER,
       payload: filter

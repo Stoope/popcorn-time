@@ -4,7 +4,6 @@ import { State as GlobalState, Actions } from 'types';
 export type State = {
   readonly isLoading: boolean;
   readonly filter: {
-    page?: number;
     sort?: 'name' | 'rating' | 'trending' | 'updated' | 'year';
     order?: 1 | -1;
     genre?:
@@ -63,17 +62,18 @@ export type State = {
     };
   }>;
   error: string | null;
+  hasMore: boolean;
 };
 
 const initialState: GlobalState['seriesReducer'] = {
   isLoading: false,
   filter: {
-    page: 1,
     sort: 'rating',
     order: -1
   },
   data: [],
-  error: null
+  error: null,
+  hasMore: false
 };
 
 const reducer = (
@@ -85,7 +85,8 @@ const reducer = (
       return {
         ...state,
         isLoading: true,
-        error: null
+        error: null,
+        hasMore: false
       };
     case constants.RESET_SERIES:
       return {
@@ -94,12 +95,15 @@ const reducer = (
     case constants.CHANGE_SERIES_FILTER:
       return {
         ...state,
-        filter: { ...state.filter, ...action.payload }
+        filter: { ...state.filter, ...action.payload },
+        data: []
       };
     case constants.LOAD_SERIES_ERROR:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        data: [],
+        hasMore: false
       };
     case constants.LOAD_SERIES_SUCCESS:
       return {
@@ -108,10 +112,11 @@ const reducer = (
         data: [
           ...state.data.filter(
             ({ _id }) =>
-              action.payload.find(item => item._id === _id) === undefined
+              action.payload.series.find(item => item._id === _id) === undefined
           ),
-          ...action.payload
-        ]
+          ...action.payload.series
+        ],
+        hasMore: action.payload.hasMore
       };
     default:
       return state;
