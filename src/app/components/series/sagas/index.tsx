@@ -14,7 +14,7 @@ export function* SERIES_LOAD_SERIES() {
         (props: State) => props.settingsReducer.config.proxy
       );
       const filter = yield select((props: State) => props.seriesReducer.filter);
-      const pagesCount = yield call(popcornAPIShowsProvider.getPages);
+      const pages = yield call(popcornAPIShowsProvider.getPages);
       const data = yield call(
         popcornAPIShowsProvider.getPage,
         {
@@ -26,7 +26,7 @@ export function* SERIES_LOAD_SERIES() {
       yield put(
         actions.loadSeriesSuccess({
           series: data,
-          hasMore: payload < pagesCount.length
+          hasMore: payload < pages.length
         })
       );
     } catch (error) {
