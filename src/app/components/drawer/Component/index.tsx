@@ -21,7 +21,7 @@ const styles: StyleRulesCallback = theme => ({
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: '100%',
+    width: 250,
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,

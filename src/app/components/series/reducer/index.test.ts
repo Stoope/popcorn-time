@@ -11,7 +11,7 @@ describe('series reducer', () => {
       },
       data: [],
       error: null,
-      hasMore: false
+      hasMore: true
     });
   });
   it('should handle LOAD_SERIES', () => {
@@ -63,7 +63,7 @@ describe('series reducer', () => {
       },
       data: [],
       error: null,
-      hasMore: false
+      hasMore: true
     });
   });
   it('should handle LOAD_SERIES_SUCCESS', () => {

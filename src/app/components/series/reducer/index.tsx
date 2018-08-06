@@ -73,7 +73,7 @@ const initialState: GlobalState['seriesReducer'] = {
   },
   data: [],
   error: null,
-  hasMore: false
+  hasMore: true
 };
 
 const reducer = (

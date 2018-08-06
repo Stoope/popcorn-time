@@ -34,5 +34,5 @@
     "sourceMap": true
   },
   "include": ["src/**/*", "typings/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/**/*.test.ts"]
 }
