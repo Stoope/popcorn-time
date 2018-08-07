@@ -27,9 +27,9 @@ class GridComponent extends React.Component<Props> {
         loader={<LinearProgress key={0} />}
         useWindow={false}
       >
-        <Grid container={true} spacing={24}>
+        <Grid container={true} spacing={16}>
           {data.map(item => (
-            <Grid key={item._id} item={true} xs={6} sm={3}>
+            <Grid key={item._id} item={true} xs="auto">
               <Card item={item} />
             </Grid>
           ))}
