@@ -15,6 +15,7 @@
     "jsx-no-multiline-js": false,
     "no-unused-expression": false,
     "no-empty-interface": false,
+    "object-literal-key-quotes": false,
     "no-import-side-effect": false,
     "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
     "no-invalid-this": [true, "check-function-in-method"],
