@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { State } from 'types';
 import { seriesActions } from '~/components/series';
-import InfiniteScroll from 'react-infinite-scroller';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Grid from '@material-ui/core/Grid';
+import Grid from '~/components/Grid';
 import Card from './Card';
 
 type Props = {
@@ -21,20 +19,13 @@ class GridComponent extends React.Component<Props> {
   render() {
     const { hasMore, data, loadSeries } = this.props;
     return (
-      <InfiniteScroll
+      <Grid
+        total={data.length}
         loadMore={loadSeries}
         hasMore={hasMore}
-        loader={<LinearProgress key={0} />}
-        useWindow={false}
-      >
-        <Grid container={true} spacing={16}>
-          {data.map(item => (
-            <Grid key={item._id} item={true} xs="auto">
-              <Card item={item} />
-            </Grid>
-          ))}
-        </Grid>
-      </InfiniteScroll>
+        cellWidth={200}
+        cellRenderer={index => <Card item={data[index]} />}
+      />
     );
   }
 }
