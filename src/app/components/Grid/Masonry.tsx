@@ -6,6 +6,8 @@ import {
   Positioner,
   CellMeasurer
 } from 'react-virtualized';
+import InfiniteScroll from './InfiniteScroll';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 type Props = {
   height: number;
@@ -52,27 +54,43 @@ class MasonryComponent extends React.Component<Props> {
     this.masonryRef = ref;
   };
   render() {
-    const { height, width, total, cellRenderer } = this.props;
+    const {
+      height,
+      width,
+      total,
+      cellRenderer,
+      hasMore,
+      loadMore
+    } = this.props;
+    const el = document.getElementsByClassName('ReactVirtualized__Masonry')[0];
     return (
-      <Masonry
-        cellCount={total}
-        autoHeight={false}
-        cellMeasurerCache={this.cache}
-        cellPositioner={this.cellPositioner}
-        cellRenderer={({ index, key, parent, style }) => (
-          <CellMeasurer
-            cache={this.cache}
-            index={index}
-            key={key}
-            parent={parent}
-          >
-            <div style={style}>{cellRenderer(index)}</div>
-          </CellMeasurer>
-        )}
-        ref={this.setMasonryRef}
-        width={width}
-        height={height}
-      />
+      <InfiniteScroll
+        scrollElement={el}
+        loadMore={loadMore}
+        hasMore={hasMore}
+        loader={<LinearProgress key={0} />}
+        useWindow={false}
+      >
+        <Masonry
+          cellCount={total}
+          autoHeight={false}
+          cellMeasurerCache={this.cache}
+          cellPositioner={this.cellPositioner}
+          cellRenderer={({ index, key, parent, style }) => (
+            <CellMeasurer
+              cache={this.cache}
+              index={index}
+              key={key}
+              parent={parent}
+            >
+              <div style={style}>{cellRenderer(index)}</div>
+            </CellMeasurer>
+          )}
+          ref={this.setMasonryRef}
+          width={width}
+          height={height}
+        />
+      </InfiniteScroll>
     );
   }
 }

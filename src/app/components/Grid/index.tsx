@@ -2,7 +2,6 @@ import React from 'react';
 import Masonry from './Masonry';
 import { AutoSizer } from 'react-virtualized';
 import InfiniteScroll from 'react-infinite-scroller';
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 type Props = {
   total: number;
@@ -26,23 +25,16 @@ class GridComponent extends React.Component<Props> {
     return (
       <AutoSizer>
         {({ height, width }) => (
-          <div style={{ height, width, overflow: 'auto' }}>
-            <InfiniteScroll
-              loadMore={loadMore}
-              hasMore={hasMore}
-              loader={<LinearProgress key={0} />}
-              useWindow={false}
-            >
-              <Masonry
-                total={total}
-                width={width}
-                cellWidth={cellWidth}
-                cellRenderer={cellRenderer}
-                spacer={spacer}
-                height={height}
-              />
-            </InfiniteScroll>
-          </div>
+          <Masonry
+            total={total}
+            width={width}
+            cellWidth={cellWidth}
+            cellRenderer={cellRenderer}
+            spacer={spacer}
+            height={height}
+            hasMore={hasMore}
+            loadMore={loadMore}
+          />
         )}
       </AutoSizer>
     );
