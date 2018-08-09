@@ -10,22 +10,40 @@ import Radio from '@material-ui/core/Radio';
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 import Input from '@material-ui/core/Input';
-import CheckIcon from '@material-ui/icons/Check';
-import * as colors from '@material-ui/core/colors';
+import { rgbToHex } from '@material-ui/core/styles/colorManipulator';
+import { capitalize } from '@material-ui/core/utils/helpers';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
+import ColorsList from './ColorsList';
 
-const hues = Object.keys(colors);
+const hues = [
+  'red',
+  'pink',
+  'purple',
+  'deepPurple',
+  'indigo',
+  'blue',
+  'lightBlue',
+  'cyan',
+  'green',
+  'lightGreen',
+  'lime',
+  'yellow',
+  'amber',
+  'orange',
+  'deepOrange',
+  'brown'
+];
 const shades = [
-  900,
-  800,
-  700,
-  600,
-  500,
-  400,
-  300,
-  200,
-  100,
-  50,
+  '900',
+  '800',
+  '700',
+  '600',
+  '500',
+  '400',
+  '300',
+  '200',
+  '100',
+  '50',
   'A700',
   'A400',
   'A200',
@@ -40,22 +58,6 @@ type Props = {
   WithTheme;
 
 const styles: StyleRulesCallback = theme => ({
-  radio: {
-    width: 48,
-    height: 48
-  },
-  radioSelected: {
-    width: 48,
-    height: 48,
-    border: '1px solid white',
-    color: theme.palette.common.white,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  swatch: {
-    width: 192
-  },
   sliderContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -82,9 +84,7 @@ class ColorPicker extends React.Component<
   { colorPickerAnchorEl: EventTarget | null }
 > {
   state = {
-    colorPickerAnchorEl: null,
-    primaryShade: 4,
-    secondaryShade: 11
+    colorPickerAnchorEl: null
   };
   openColorPicker = (event: React.MouseEvent<HTMLElement>) => {
     this.setState({
@@ -97,17 +97,32 @@ class ColorPicker extends React.Component<
       colorPickerAnchorEl: null
     });
   };
+  changeSettings = (color: string) => {
+    this.props.changeSettings({
+      theme: {
+        palette: {
+          [this.props.type]: { main: color }
+        }
+      }
+    });
+  };
   render() {
     const { colorPickerAnchorEl, secondaryShade, primaryShade } = this.state;
     const { type, theme, classes, changeSettings } = this.props;
-    // let color = null;
-    // switch (type) {
-    //   case 'primary':
-    //     color = theme.palette.primary;
-    //     break;
-    //   default:
-    //     break;
-    // }
+    let color = null;
+    let shade = null;
+    switch (type) {
+      case 'primary':
+        color = theme.palette.primary.main;
+        shade = 4;
+        break;
+      case 'secondary':
+        color = theme.palette.secondary.main;
+        shade = 11;
+        break;
+      default:
+        break;
+    }
     return (
       <Fragment>
         <Button variant="contained" color={type} onClick={this.openColorPicker}>
@@ -126,20 +141,37 @@ class ColorPicker extends React.Component<
             horizontal: 'right'
           }}
         >
-          <Grid item={true} xs={12} sm={6} md={4}>
-            {/* <Typography gutterBottom variant="title">
-            {capitalize(intent)}
-          </Typography>
-          <Input
-            id={intent}
-            value={intentInput}
-            onChange={this.handleChangeColor(intent)}
-            inputProps={{
-              'aria-label': `${capitalize(intent)} color`,
-            }}
-            fullWidth
-          />
-          <div className={classes.sliderContainer}>
+          <div>
+            {/* <Typography gutterBottom={true} variant="title">
+              {capitalize(theme.palette.primary.main)}
+            </Typography>
+            <Input
+              id={theme.palette.primary.main}
+              value={theme.palette.primary.main}
+              onChange={event => {
+                const isRgb = (string: string) =>
+                  /#?([0-9a-f]{6})/i.test(string);
+
+                const {
+                  target: { value: color }
+                } = event;
+
+                if (isRgb(color)) {
+                  changeSettings({
+                    theme: {
+                      palette: {
+                        [type]: { main: event.target.value }
+                      }
+                    }
+                  });
+                }
+              }}
+              inputProps={{
+                'aria-label': `${capitalize(theme.palette.primary.main)} color`
+              }}
+              fullWidth
+            /> */}
+            {/* <div className={classes.sliderContainer}>
             <Typography id={`${intent}ShadeSliderLabel`}>Shade:</Typography>
             <Slider
               className={classes.slider}
@@ -152,52 +184,38 @@ class ColorPicker extends React.Component<
             />
             <Typography>{shades[intentShade]}</Typography>
           </div> */}
-            <div className={classes.swatch}>
-              {hues.map(hue => {
-                const shade =
-                  type === 'primary'
-                    ? shades[primaryShade]
-                    : shades[secondaryShade];
-                const backgroundColor = colors[hue][shade];
-
-                return (
-                  <Tooltip placement="right" title={hue} key={hue}>
-                    <Radio
-                      color="default"
-                      checked={theme.palette[type].main === backgroundColor}
-                      onChange={() =>
-                        changeSettings({
-                          theme: {
-                            palette: {
-                              [type]: { main: backgroundColor }
-                            }
-                          }
-                        })
-                      }
-                      value={hue}
-                      name={type}
-                      aria-labelledby={`tooltip-${type}-${hue}`}
-                      icon={
-                        <div
-                          className={classes.radio}
-                          style={{ backgroundColor }}
-                        />
-                      }
-                      checkedIcon={
-                        <div
-                          className={classes.radioSelected}
-                          style={{ backgroundColor }}
-                        >
-                          <CheckIcon style={{ fontSize: 30 }} />
-                        </div>
-                      }
-                    />
-                  </Tooltip>
-                );
-              })}
-            </div>
-            {/* {colorBar(color)} */}
-          </Grid>
+            <ColorsList
+              hues={hues}
+              shades={shades}
+              currentColor={color}
+              shade={shade}
+              changeSettings={this.changeSettings}
+            />
+            {/* {(() => {
+              const background = { main: theme.palette.primary.main };
+              theme.palette.augmentColor(background);
+              return (
+                <Grid container className={classes.colorBar}>
+                  {['dark', 'main', 'light'].map(key => (
+                    <div
+                      className={classes.colorSquare}
+                      style={{ backgroundColor: background[key] }}
+                      key={key}
+                    >
+                      <Typography
+                        variant="caption"
+                        style={{
+                          color: theme.palette.getContrastText(background[key])
+                        }}
+                      >
+                        {rgbToHex(background[key])}
+                      </Typography>
+                    </div>
+                  ))}
+                </Grid>
+              );
+            })()} */}
+          </div>
         </Popover>
       </Fragment>
     );
