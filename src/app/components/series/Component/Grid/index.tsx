@@ -14,7 +14,7 @@ type Props = {
 };
 
 class GridComponent extends React.Component<Props> {
-  componentDidMount() {
+  componentWillUnmount() {
     this.props.resetSeries();
   }
   keyMapper = (index: number) => {
