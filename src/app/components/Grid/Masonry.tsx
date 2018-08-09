@@ -4,10 +4,11 @@ import {
   CellMeasurerCache,
   createMasonryCellPositioner,
   Positioner,
-  CellMeasurer
+  CellMeasurer,
+  OnScrollCallback
 } from 'react-virtualized';
-import InfiniteScroll from './InfiniteScroll';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 
 type Props = {
   height: number;
@@ -15,15 +16,29 @@ type Props = {
   total: number;
   spacer: number;
   cellWidth: number;
+  hasMore: boolean;
+  isLoadingItems: boolean;
+  loadMore: (page: number) => void;
   cellRenderer: (index: number) => JSX.Element;
+  keyMapper: (index: number) => any;
+  classes: Record<string, string>;
 };
+const styles: StyleRulesCallback = theme => ({
+  masonry: {
+    '&:focus': {
+      outline: 'none'
+    }
+  }
+});
 
-class MasonryComponent extends React.Component<Props> {
+class MasonryComponent extends React.Component<Props, { currentPage: number }> {
   cache: CellMeasurerCache;
   cellPositioner: Positioner;
   masonryRef: Masonry | null = null;
+
   constructor(props: Props) {
     super(props);
+    this.state = { currentPage: 1 };
     this.cache = new CellMeasurerCache({
       defaultWidth: props.cellWidth,
       fixedWidth: true
@@ -35,6 +50,7 @@ class MasonryComponent extends React.Component<Props> {
       spacer: props.spacer
     });
   }
+
   componentDidUpdate(prevProps: Props) {
     if (
       prevProps.height !== this.props.height ||
@@ -53,46 +69,51 @@ class MasonryComponent extends React.Component<Props> {
   setMasonryRef = (ref: Masonry) => {
     this.masonryRef = ref;
   };
+
+  onScroll: OnScrollCallback = ({ clientHeight, scrollHeight, scrollTop }) => {
+    const offset = scrollHeight - scrollTop - clientHeight;
+    if (offset < 500 && !this.props.isLoadingItems) {
+      this.props.loadMore(this.state.currentPage);
+      this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }));
+    }
+  };
+
   render() {
     const {
       height,
       width,
       total,
       cellRenderer,
-      hasMore,
-      loadMore
+      spacer,
+      keyMapper,
+      classes
     } = this.props;
-    const el = document.getElementsByClassName('ReactVirtualized__Masonry')[0];
     return (
-      <InfiniteScroll
-        scrollElement={el}
-        loadMore={loadMore}
-        hasMore={hasMore}
-        loader={<LinearProgress key={0} />}
-        useWindow={false}
-      >
-        <Masonry
-          cellCount={total}
-          autoHeight={false}
-          cellMeasurerCache={this.cache}
-          cellPositioner={this.cellPositioner}
-          cellRenderer={({ index, key, parent, style }) => (
-            <CellMeasurer
-              cache={this.cache}
-              index={index}
-              key={key}
-              parent={parent}
-            >
-              <div style={style}>{cellRenderer(index)}</div>
-            </CellMeasurer>
-          )}
-          ref={this.setMasonryRef}
-          width={width}
-          height={height}
-        />
-      </InfiniteScroll>
+      <Masonry
+        className={classes.masonry}
+        style={{ padding: spacer }}
+        cellCount={total}
+        keyMapper={keyMapper}
+        onScroll={this.onScroll}
+        autoHeight={false}
+        cellMeasurerCache={this.cache}
+        cellPositioner={this.cellPositioner}
+        cellRenderer={({ index, key, parent, style }) => (
+          <CellMeasurer
+            cache={this.cache}
+            index={index}
+            key={key}
+            parent={parent}
+          >
+            <div style={style}>{cellRenderer(index)}</div>
+          </CellMeasurer>
+        )}
+        ref={this.setMasonryRef}
+        width={width}
+        height={height}
+      />
     );
   }
 }
 
-export default MasonryComponent;
+export default withStyles(styles)(MasonryComponent);

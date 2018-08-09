@@ -1,15 +1,16 @@
 import React from 'react';
 import Masonry from './Masonry';
 import { AutoSizer } from 'react-virtualized';
-import InfiniteScroll from 'react-infinite-scroller';
 
 type Props = {
   total: number;
   cellWidth: number;
   spacer?: number;
   hasMore: boolean;
+  isLoadingItems: boolean;
   loadMore: (page: number) => void;
   cellRenderer: (index: number) => JSX.Element;
+  keyMapper: (index: number) => any;
 };
 
 class GridComponent extends React.Component<Props> {
@@ -20,12 +21,16 @@ class GridComponent extends React.Component<Props> {
       cellRenderer,
       cellWidth,
       hasMore,
-      loadMore
+      loadMore,
+      isLoadingItems,
+      keyMapper
     } = this.props;
     return (
       <AutoSizer>
         {({ height, width }) => (
           <Masonry
+            keyMapper={keyMapper}
+            isLoadingItems={isLoadingItems}
             total={total}
             width={width}
             cellWidth={cellWidth}

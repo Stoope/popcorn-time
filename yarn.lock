@@ -179,12 +179,6 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react-infinite-scroller@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@types/react-infinite-scroller/-/react-infinite-scroller-1.0.7.tgz#c4b001b06ba919a8370c6bdac05781f25d7b0bd7"
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-intl@^2.3.8":
   version "2.3.9"
   resolved "https://registry.yarnpkg.com/@types/react-intl/-/react-intl-2.3.9.tgz#47dfc2c4ff82c938ffb0ecaa1bc9f2f449f191cc"
@@ -6677,12 +6671,6 @@ react-event-listener@^0.6.2:
     "@babel/runtime" "7.0.0-beta.42"
     prop-types "^15.6.0"
     warning "^4.0.1"
-
-react-infinite-scroller@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-infinite-scroller/-/react-infinite-scroller-1.2.0.tgz#ea89906c5bc918dce486880b59e88847518aa538"
-  dependencies:
-    prop-types "^15.5.8"
 
 react-intl@^2.4.0:
   version "2.4.0"
