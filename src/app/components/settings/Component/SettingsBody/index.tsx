@@ -8,6 +8,7 @@ import List from '@material-ui/core/List';
 import { State } from 'types';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import NightMode from './NightMode';
+import Color from './Color';
 
 type Props = {
   config: State['settingsReducer']['config'];
@@ -46,6 +47,7 @@ const SettingsBody: React.SFC<Props> = ({
           {intl.formatMessage(messages.settings_SettingsBody_appearance)}
         </ListSubheader>
         <NightMode changeSettings={changeSettings} />
+        <Color changeSettings={changeSettings} />
       </ul>
     </li>
   </List>

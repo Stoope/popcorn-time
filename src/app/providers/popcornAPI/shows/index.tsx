@@ -1,6 +1,5 @@
 import axios, { AxiosProxyConfig } from 'axios';
 import queryString from 'query-string';
-import memoize from 'memoizee';
 import { Filter } from '../';
 
 const baseUrl = 'https://tv-v2.api-fetch.website';
