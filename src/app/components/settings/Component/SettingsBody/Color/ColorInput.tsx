@@ -4,6 +4,7 @@ import { capitalize } from '@material-ui/core/utils/helpers';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 
 type Props = {
+  type: 'primary' | 'secondary';
   currentColor: string;
   classes: Record<string, string>;
   changeSettings: (color: string) => void;
@@ -11,7 +12,17 @@ type Props = {
 const styles: StyleRulesCallback = theme => ({
   input: {
     marginTop: theme.spacing.unit * 2
-  }
+  },
+  secondaryUnderline: {
+    '&:after': {
+      borderBottomColor: theme.palette.secondary.main,
+    },
+  },
+  primaryUnderline: {
+    '&:after': {
+      borderBottomColor: theme.palette.primary.main,
+    },
+  },
 });
 
 class ColorInput extends React.Component<Props, { color: string }> {
@@ -29,9 +40,12 @@ class ColorInput extends React.Component<Props, { color: string }> {
     }
   }
   render() {
-    const { currentColor, changeSettings, classes } = this.props;
+    const { currentColor, changeSettings, classes, type } = this.props;
     return (
       <Input
+        classes={{
+          underline: type === 'secondary' ? classes.secondaryUnderline : classes.primaryUnderline
+        }}
         className={classes.input}
         id={currentColor}
         value={this.state.color}

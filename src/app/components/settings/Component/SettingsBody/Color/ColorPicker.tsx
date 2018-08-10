@@ -124,6 +124,7 @@ class ColorPicker extends React.Component<
           <ColorTitle type={type} />
           <ColorInput
             currentColor={color}
+            type={type}
             changeSettings={this.changeSettings}
           />
           <ColorsList
