@@ -6,15 +6,18 @@ import CheckIcon from '@material-ui/icons/Check';
 import * as colors from '@material-ui/core/colors';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import { WithTheme, withTheme } from '@material-ui/core/styles';
 
 type Props = {
+  type: 'primary' | 'secondary';
   shades: string[];
   shade: number;
   currentColor: string;
   hue: string;
   changeSettings: (color: string) => void;
   classes: Record<string, string>;
-} & InjectedIntlProps;
+} & InjectedIntlProps &
+  WithTheme;
 
 const styles: StyleRulesCallback = theme => ({
   iconButton: {
@@ -59,7 +62,7 @@ class Color extends React.Component<Props, { color: string }> {
     this.props.changeSettings(this.state.color);
   };
   render() {
-    const { classes, hue, currentColor, intl } = this.props;
+    const { classes, hue, currentColor, intl, theme, type } = this.props;
     const { color } = this.state;
     const translatedHue: string = (messages as any)[
       `settings_SettingsBody_${hue}`
@@ -82,11 +85,16 @@ class Color extends React.Component<Props, { color: string }> {
           onClick={this.changeSettings}
           aria-label={`tooltip-${hue}`}
         >
-          {isSelected && <CheckIcon className={classes.checkIcon} />}
+          {isSelected && (
+            <CheckIcon
+              style={{ color: theme.palette[type].contrastText }}
+              className={classes.checkIcon}
+            />
+          )}
         </IconButton>
       </Tooltip>
     );
   }
 }
 
-export default withStyles(styles)(injectIntl(Color));
+export default withStyles(styles)(withTheme()(injectIntl(Color)));

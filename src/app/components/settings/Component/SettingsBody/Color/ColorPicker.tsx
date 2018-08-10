@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { settingsActions } from '~/components/settings';
 import { WithTheme, withTheme } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import Button from '@material-ui/core/Button';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import ColorsList from './ColorsList';
 import ShadesList from './ShadesList';
@@ -47,6 +46,8 @@ const shades = [
 type Props = {
   type: 'primary' | 'secondary';
   changeSettings: typeof settingsActions.changeSettings;
+  colorPickerAnchorEl: EventTarget & HTMLElement | null;
+  closeColorPicker: () => void;
   classes: Record<string, string>;
 } & WithTheme;
 
@@ -63,7 +64,6 @@ const styles: StyleRulesCallback = theme => ({
 class ColorPicker extends React.Component<
   Props,
   {
-    colorPickerAnchorEl: EventTarget & HTMLElement | null;
     shade: number;
   }
 > {
@@ -82,21 +82,9 @@ class ColorPicker extends React.Component<
         break;
     }
     this.state = {
-      colorPickerAnchorEl: null,
       shade
     };
   }
-  openColorPicker = (event: React.MouseEvent<HTMLElement>) => {
-    this.setState({
-      colorPickerAnchorEl: event.currentTarget
-    });
-  };
-
-  closeColorPicker = () => {
-    this.setState({
-      colorPickerAnchorEl: null
-    });
-  };
   changeSettings = (color: string) => {
     const muiColor = { main: color };
     this.props.theme.palette.augmentColor(muiColor, 500, 300, 700);
@@ -109,44 +97,46 @@ class ColorPicker extends React.Component<
     });
   };
   render() {
-    const { colorPickerAnchorEl, shade } = this.state;
-    const { type, theme, classes } = this.props;
+    const { shade } = this.state;
+    const {
+      type,
+      theme,
+      classes,
+      colorPickerAnchorEl,
+      closeColorPicker
+    } = this.props;
     const color = theme.palette[type].main;
     return (
-      <Fragment>
-        <Button variant="contained" color={type} onClick={this.openColorPicker}>
-          ···
-        </Button>
-        <Popover
-          open={Boolean(colorPickerAnchorEl)}
-          anchorEl={colorPickerAnchorEl}
-          onClose={this.closeColorPicker}
-          anchorOrigin={{
-            vertical: 'center',
-            horizontal: 'center'
-          }}
-          transformOrigin={{
-            vertical: 'center',
-            horizontal: 'right'
-          }}
-        >
-          <div className={classes.container}>
-            <ColorTitle type={type} />
-            <ColorInput
-              currentColor={color}
-              changeSettings={this.changeSettings}
-            />
-            <ColorsList
-              hues={hues}
-              shades={shades}
-              currentColor={color}
-              shade={shade}
-              changeSettings={this.changeSettings}
-            />
-            <ShadesList currentColor={color} />
-          </div>
-        </Popover>
-      </Fragment>
+      <Popover
+        open={Boolean(colorPickerAnchorEl)}
+        anchorEl={colorPickerAnchorEl}
+        onClose={closeColorPicker}
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'right'
+        }}
+      >
+        <div className={classes.container}>
+          <ColorTitle type={type} />
+          <ColorInput
+            currentColor={color}
+            changeSettings={this.changeSettings}
+          />
+          <ColorsList
+            hues={hues}
+            type={type}
+            shades={shades}
+            currentColor={color}
+            shade={shade}
+            changeSettings={this.changeSettings}
+          />
+          <ShadesList currentColor={color} />
+        </div>
+      </Popover>
     );
   }
 }

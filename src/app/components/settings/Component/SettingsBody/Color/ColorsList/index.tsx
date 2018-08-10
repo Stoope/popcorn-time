@@ -6,6 +6,7 @@ type Props = {
   hues: string[];
   shades: string[];
   shade: number;
+  type: 'primary' | 'secondary';
   currentColor: string;
   changeSettings: (color: string) => void;
   classes: Record<string, string>;
@@ -27,12 +28,14 @@ class ColorsList extends React.Component<Props> {
       hues,
       shades,
       shade,
-      currentColor
+      currentColor,
+      type
     } = this.props;
     return (
       <div className={classes.container}>
         {hues.map(hue => (
           <Color
+            type={type}
             key={hue}
             shades={shades}
             shade={shade}

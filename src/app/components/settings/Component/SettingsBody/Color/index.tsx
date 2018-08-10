@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ColorPicker from './ColorPicker';
 import ColorLens from '@material-ui/icons/ColorLens';
 import { WithTheme, withTheme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 type Props = {
   type: 'primary' | 'secondary';
@@ -16,15 +17,28 @@ type Props = {
 } & InjectedIntlProps &
   WithTheme;
 
-class NightMode extends React.Component<Props> {
-  changeSettings = () => {
-    this.props.changeSettings({
-      theme: {
-        palette: {
-          type: this.props.theme.palette.type === 'dark' ? 'light' : 'dark'
-        }
-      }
+class NightMode extends React.Component<
+  Props,
+  {
+    colorPickerAnchorEl: EventTarget & HTMLElement | null;
+  }
+> {
+  buttonRef: any;
+  state = {
+    colorPickerAnchorEl: null
+  };
+  openColorPicker = (event: React.MouseEvent<HTMLElement>) => {
+    this.setState({
+      colorPickerAnchorEl: this.buttonRef
     });
+  };
+  closeColorPicker = () => {
+    this.setState({
+      colorPickerAnchorEl: null
+    });
+  };
+  setButtonRef = (ref: any) => {
+    this.buttonRef = ref;
   };
   render() {
     const { intl, changeSettings, type } = this.props;
@@ -45,13 +59,26 @@ class NightMode extends React.Component<Props> {
         break;
     }
     return (
-      <ListItem button={true} onClick={this.changeSettings}>
+      <ListItem button={true} onClick={this.openColorPicker}>
         <ListItemIcon>
           <ColorLens />
         </ListItemIcon>
         <ListItemText primary={title} />
         <ListItemSecondaryAction>
-          <ColorPicker changeSettings={changeSettings} type={type} />
+          <Button
+            buttonRef={this.setButtonRef}
+            variant="contained"
+            color={type}
+            onClick={this.openColorPicker}
+          >
+            ···
+          </Button>
+          <ColorPicker
+            closeColorPicker={this.closeColorPicker}
+            colorPickerAnchorEl={this.state.colorPickerAnchorEl}
+            changeSettings={changeSettings}
+            type={type}
+          />
         </ListItemSecondaryAction>
       </ListItem>
     );
