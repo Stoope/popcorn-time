@@ -7,7 +7,6 @@ import {
   CellMeasurer,
   OnScrollCallback
 } from 'react-virtualized';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 
 type Props = {
