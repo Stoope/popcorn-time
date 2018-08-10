@@ -8,6 +8,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import ColorPicker from './ColorPicker';
 import ColorLens from '@material-ui/icons/ColorLens';
+import ColorLensTwoTone from '@material-ui/icons/ColorLensTwoTone';
 import { WithTheme, withTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -23,22 +24,23 @@ class NightMode extends React.Component<
     colorPickerAnchorEl: EventTarget & HTMLElement | null;
   }
 > {
-  buttonRef: any;
+  buttonRef: React.RefObject<HTMLButtonElement>;
   state = {
     colorPickerAnchorEl: null
   };
+  constructor(props: Props) {
+    super(props);
+    this.buttonRef = React.createRef();
+  }
   openColorPicker = (event: React.MouseEvent<HTMLElement>) => {
     this.setState({
-      colorPickerAnchorEl: this.buttonRef
+      colorPickerAnchorEl: this.buttonRef.current
     });
   };
   closeColorPicker = () => {
     this.setState({
       colorPickerAnchorEl: null
     });
-  };
-  setButtonRef = (ref: any) => {
-    this.buttonRef = ref;
   };
   render() {
     const { intl, changeSettings, type } = this.props;
@@ -61,12 +63,12 @@ class NightMode extends React.Component<
     return (
       <ListItem button={true} onClick={this.openColorPicker}>
         <ListItemIcon>
-          <ColorLens />
+          {type === 'secondary' ? <ColorLensTwoTone /> : <ColorLens />}
         </ListItemIcon>
         <ListItemText primary={title} />
         <ListItemSecondaryAction>
           <Button
-            buttonRef={this.setButtonRef}
+            buttonRef={this.buttonRef}
             variant="contained"
             color={type}
             onClick={this.openColorPicker}
