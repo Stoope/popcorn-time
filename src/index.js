@@ -15,7 +15,7 @@ if (process.env.ELECTRON_START_URL) {
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 1280, height: 720 });
+  mainWindow = new BrowserWindow({ width: 1400, height: 768 });
 
   const startUrl =
     process.env.ELECTRON_START_URL ||
