@@ -22,5 +22,8 @@
   "app.SettingsBody.amber": "Amber",
   "app.SettingsBody.orange": "Orange",
   "app.SettingsBody.deepOrange": "Deep orange",
-  "app.SettingsBody.brown": "Brown"
+  "app.SettingsBody.brown": "Brown",
+  "app.SettingsBody.ontSize": "Font size",
+  "app.SettingsBody.title.primary": "Primary color",
+  "app.SettingsBody.title.secondary": "Secondary color"
 }

@@ -11,6 +11,11 @@ const messages = defineMessages({
     defaultMessage: 'Night mode',
     description: 'Appearance theme night mode switch'
   },
+  settings_SettingsBody_fontSize: {
+    id: 'app.SettingsBody.ontSize',
+    defaultMessage: 'Font size',
+    description: 'Font size settings'
+  },
   settings_SettingsBody_title_primary: {
     id: 'app.SettingsBody.title.primary',
     defaultMessage: 'Primary color',

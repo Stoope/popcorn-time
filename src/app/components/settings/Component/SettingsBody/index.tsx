@@ -9,6 +9,7 @@ import { State } from 'types';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import NightMode from './NightMode';
 import Color from './Color';
+import FontSize from './FontSize';
 
 type Props = {
   config: State['settingsReducer']['config'];
@@ -49,6 +50,7 @@ const SettingsBody: React.SFC<Props> = ({
         <NightMode changeSettings={changeSettings} />
         <Color changeSettings={changeSettings} type="primary" />
         <Color changeSettings={changeSettings} type="secondary" />
+        <FontSize changeSettings={changeSettings} />
       </ul>
     </li>
   </List>
