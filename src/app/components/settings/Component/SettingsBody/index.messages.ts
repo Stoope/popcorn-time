@@ -6,10 +6,25 @@ const messages = defineMessages({
     defaultMessage: 'Appearance',
     description: 'Appearance settings'
   },
-  settings_SettingsBody_NightMode: {
-    id: 'app.SettingsBody.NightMode',
+  settings_SettingsBody_nightMode: {
+    id: 'app.SettingsBody.nightMode',
     defaultMessage: 'Night mode',
     description: 'Appearance theme night mode switch'
+  },
+  settings_SettingsBody_title_primary: {
+    id: 'app.SettingsBody.title.primary',
+    defaultMessage: 'Primary color',
+    description: 'Primary color title'
+  },
+  settings_SettingsBody_title_secondary: {
+    id: 'app.SettingsBody.title.secondary',
+    defaultMessage: 'Secondary color',
+    description: 'Secondary color title'
+  },
+  settings_SettingsBody_snades: {
+    id: 'app.SettingsBody.snades',
+    defaultMessage: 'Snades:',
+    description: 'Snades of current color'
   },
   settings_SettingsBody_red: {
     id: 'app.SettingsBody.red',

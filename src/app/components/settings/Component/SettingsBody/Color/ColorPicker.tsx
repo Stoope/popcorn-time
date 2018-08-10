@@ -1,19 +1,13 @@
 import React, { Fragment } from 'react';
-import messages from '../index.messages';
-import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { settingsActions } from '~/components/settings';
 import { WithTheme, withTheme } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Radio from '@material-ui/core/Radio';
-import Grid from '@material-ui/core/Grid';
-import Tooltip from '@material-ui/core/Tooltip';
-import Input from '@material-ui/core/Input';
-import { rgbToHex } from '@material-ui/core/styles/colorManipulator';
-import { capitalize } from '@material-ui/core/utils/helpers';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import ColorsList from './ColorsList';
+import ShadesList from './ShadesList';
+import ColorInput from './ColorInput';
+import ColorTitle from './ColorTitle';
 
 const hues = [
   'red',
@@ -54,38 +48,44 @@ type Props = {
   type: 'primary' | 'secondary';
   changeSettings: typeof settingsActions.changeSettings;
   classes: Record<string, string>;
-} & InjectedIntlProps &
-  WithTheme;
+} & WithTheme;
 
 const styles: StyleRulesCallback = theme => ({
-  sliderContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit
-  },
   slider: {
     width: 'calc(100% - 80px)'
   },
-  colorBar: {
-    marginTop: theme.spacing.unit * 2
-  },
-  colorSquare: {
-    width: 64,
-    height: 64,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+  container: {
+    padding: theme.spacing.unit,
+    width: theme.spacing.unit * 2 + 240
   }
 });
 
 class ColorPicker extends React.Component<
   Props,
-  { colorPickerAnchorEl: EventTarget | null }
+  {
+    colorPickerAnchorEl: EventTarget & HTMLElement | null;
+    shade: number;
+  }
 > {
-  state = {
-    colorPickerAnchorEl: null
-  };
+  constructor(props: Props) {
+    super(props);
+    let shade = null;
+    switch (props.type) {
+      case 'primary':
+        shade = 4;
+        break;
+      case 'secondary':
+        shade = 11;
+        break;
+      default:
+        shade = 0;
+        break;
+    }
+    this.state = {
+      colorPickerAnchorEl: null,
+      shade
+    };
+  }
   openColorPicker = (event: React.MouseEvent<HTMLElement>) => {
     this.setState({
       colorPickerAnchorEl: event.currentTarget
@@ -98,35 +98,24 @@ class ColorPicker extends React.Component<
     });
   };
   changeSettings = (color: string) => {
+    const muiColor = { main: color };
+    this.props.theme.palette.augmentColor(muiColor, 500, 300, 700);
     this.props.changeSettings({
       theme: {
         palette: {
-          [this.props.type]: { main: color }
+          [this.props.type]: muiColor
         }
       }
     });
   };
   render() {
-    const { colorPickerAnchorEl, secondaryShade, primaryShade } = this.state;
-    const { type, theme, classes, changeSettings } = this.props;
-    let color = null;
-    let shade = null;
-    switch (type) {
-      case 'primary':
-        color = theme.palette.primary.main;
-        shade = 4;
-        break;
-      case 'secondary':
-        color = theme.palette.secondary.main;
-        shade = 11;
-        break;
-      default:
-        break;
-    }
+    const { colorPickerAnchorEl, shade } = this.state;
+    const { type, theme, classes } = this.props;
+    const color = theme.palette[type].main;
     return (
       <Fragment>
         <Button variant="contained" color={type} onClick={this.openColorPicker}>
-          Open Popover
+          ···
         </Button>
         <Popover
           open={Boolean(colorPickerAnchorEl)}
@@ -141,49 +130,12 @@ class ColorPicker extends React.Component<
             horizontal: 'right'
           }}
         >
-          <div>
-            {/* <Typography gutterBottom={true} variant="title">
-              {capitalize(theme.palette.primary.main)}
-            </Typography>
-            <Input
-              id={theme.palette.primary.main}
-              value={theme.palette.primary.main}
-              onChange={event => {
-                const isRgb = (string: string) =>
-                  /#?([0-9a-f]{6})/i.test(string);
-
-                const {
-                  target: { value: color }
-                } = event;
-
-                if (isRgb(color)) {
-                  changeSettings({
-                    theme: {
-                      palette: {
-                        [type]: { main: event.target.value }
-                      }
-                    }
-                  });
-                }
-              }}
-              inputProps={{
-                'aria-label': `${capitalize(theme.palette.primary.main)} color`
-              }}
-              fullWidth
-            /> */}
-            {/* <div className={classes.sliderContainer}>
-            <Typography id={`${intent}ShadeSliderLabel`}>Shade:</Typography>
-            <Slider
-              className={classes.slider}
-              value={intentShade}
-              min={0}
-              max={13}
-              step={1}
-              onChange={this.handleChangeShade(intent)}
-              aria-labelledby={`${intent}ShadeSliderLabel`}
+          <div className={classes.container}>
+            <ColorTitle type={type} />
+            <ColorInput
+              currentColor={color}
+              changeSettings={this.changeSettings}
             />
-            <Typography>{shades[intentShade]}</Typography>
-          </div> */}
             <ColorsList
               hues={hues}
               shades={shades}
@@ -191,30 +143,7 @@ class ColorPicker extends React.Component<
               shade={shade}
               changeSettings={this.changeSettings}
             />
-            {/* {(() => {
-              const background = { main: theme.palette.primary.main };
-              theme.palette.augmentColor(background);
-              return (
-                <Grid container className={classes.colorBar}>
-                  {['dark', 'main', 'light'].map(key => (
-                    <div
-                      className={classes.colorSquare}
-                      style={{ backgroundColor: background[key] }}
-                      key={key}
-                    >
-                      <Typography
-                        variant="caption"
-                        style={{
-                          color: theme.palette.getContrastText(background[key])
-                        }}
-                      >
-                        {rgbToHex(background[key])}
-                      </Typography>
-                    </div>
-                  ))}
-                </Grid>
-              );
-            })()} */}
+            <ShadesList currentColor={color} />
           </div>
         </Popover>
       </Fragment>
@@ -222,4 +151,4 @@ class ColorPicker extends React.Component<
   }
 }
 
-export default injectIntl(withTheme()(withStyles(styles)(ColorPicker)));
+export default withStyles(styles)(withTheme()(ColorPicker));

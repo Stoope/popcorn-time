@@ -33,7 +33,7 @@ class NightMode extends React.Component<Props> {
           <Brightness2 />
         </ListItemIcon>
         <ListItemText
-          primary={intl.formatMessage(messages.settings_SettingsBody_NightMode)}
+          primary={intl.formatMessage(messages.settings_SettingsBody_nightMode)}
         />
         <ListItemSecondaryAction>
           <Switch

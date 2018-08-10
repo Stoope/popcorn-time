@@ -11,6 +11,7 @@ import ColorLens from '@material-ui/icons/ColorLens';
 import { WithTheme, withTheme } from '@material-ui/core/styles';
 
 type Props = {
+  type: 'primary' | 'secondary';
   changeSettings: typeof settingsActions.changeSettings;
 } & InjectedIntlProps &
   WithTheme;
@@ -26,17 +27,31 @@ class NightMode extends React.Component<Props> {
     });
   };
   render() {
-    const { theme, intl, changeSettings } = this.props;
+    const { intl, changeSettings, type } = this.props;
+    let title = null;
+    switch (type) {
+      case 'primary':
+        title = intl.formatMessage(
+          messages.settings_SettingsBody_title_primary
+        );
+        break;
+      case 'secondary':
+        title = intl.formatMessage(
+          messages.settings_SettingsBody_title_secondary
+        );
+        break;
+      default:
+        title = 'Color';
+        break;
+    }
     return (
       <ListItem button={true} onClick={this.changeSettings}>
         <ListItemIcon>
           <ColorLens />
         </ListItemIcon>
-        <ListItemText
-          primary={intl.formatMessage(messages.settings_SettingsBody_NightMode)}
-        />
+        <ListItemText primary={title} />
         <ListItemSecondaryAction>
-          <ColorPicker changeSettings={changeSettings} type="primary" />
+          <ColorPicker changeSettings={changeSettings} type={type} />
         </ListItemSecondaryAction>
       </ListItem>
     );

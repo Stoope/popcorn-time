@@ -47,7 +47,8 @@ const SettingsBody: React.SFC<Props> = ({
           {intl.formatMessage(messages.settings_SettingsBody_appearance)}
         </ListSubheader>
         <NightMode changeSettings={changeSettings} />
-        <Color changeSettings={changeSettings} />
+        <Color changeSettings={changeSettings} type="primary" />
+        <Color changeSettings={changeSettings} type="secondary" />
       </ul>
     </li>
   </List>
