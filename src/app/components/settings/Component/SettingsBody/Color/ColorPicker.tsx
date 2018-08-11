@@ -123,6 +123,7 @@ class ColorPicker extends React.Component<
         <div className={classes.container}>
           <ColorTitle type={type} />
           <ColorInput
+            key={color}
             currentColor={color}
             type={type}
             changeSettings={this.changeSettings}

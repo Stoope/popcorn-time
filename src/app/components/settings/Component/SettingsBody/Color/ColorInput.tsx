@@ -15,15 +15,19 @@ const styles: StyleRulesCallback = theme => ({
   },
   secondaryUnderline: {
     '&:after': {
-      borderBottomColor: theme.palette.secondary.main,
-    },
+      borderBottomColor: theme.palette.secondary.main
+    }
   },
   primaryUnderline: {
     '&:after': {
-      borderBottomColor: theme.palette.primary.main,
-    },
-  },
+      borderBottomColor: theme.palette.primary.main
+    }
+  }
 });
+
+const isRgb = (color: string) => {
+  return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(color);
+};
 
 class ColorInput extends React.Component<Props, { color: string }> {
   constructor(props: Props) {
@@ -32,26 +36,21 @@ class ColorInput extends React.Component<Props, { color: string }> {
       color: props.currentColor
     };
   }
-  componentDidUpdate(nextProps: Props) {
-    if (this.props.currentColor !== nextProps.currentColor) {
-      this.setState({
-        color: nextProps.currentColor
-      });
-    }
-  }
   render() {
     const { currentColor, changeSettings, classes, type } = this.props;
     return (
       <Input
         classes={{
-          underline: type === 'secondary' ? classes.secondaryUnderline : classes.primaryUnderline
+          underline:
+            type === 'secondary'
+              ? classes.secondaryUnderline
+              : classes.primaryUnderline
         }}
+        error={!isRgb(this.state.color)}
         className={classes.input}
         id={currentColor}
         value={this.state.color}
         onChange={event => {
-          const isRgb = (color: string) =>
-            /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(color);
           const value = event.target.value;
           this.setState({ color: value }, () => {
             if (isRgb(value)) {

@@ -48,16 +48,6 @@ class Color extends React.Component<Props, { color: string }> {
       color: (colors as any)[props.hue][props.shades[props.shade]]
     };
   }
-  componentDidUpdate(nextProps: Props) {
-    const newColor = (colors as any)[nextProps.hue][
-      nextProps.shades[nextProps.shade]
-    ];
-    if (this.state.color !== newColor) {
-      this.setState({
-        color: newColor
-      });
-    }
-  }
   changeSettings = () => {
     this.props.changeSettings(this.state.color);
   };
