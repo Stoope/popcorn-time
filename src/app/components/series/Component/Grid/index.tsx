@@ -29,7 +29,7 @@ class GridComponent extends React.Component<Props> {
         total={data.length}
         loadMore={loadSeries}
         hasMore={hasMore}
-        cellWidth={200}
+        cellWidth={206}
         cellRenderer={index => <Card item={data[index]} />}
       />
     );

@@ -44,11 +44,21 @@ class MasonryComponent extends React.Component<Props, { currentPage: number }> {
     });
     this.cellPositioner = createMasonryCellPositioner({
       cellMeasurerCache: this.cache,
-      columnCount: Math.floor(props.width / (props.cellWidth + props.spacer)),
+      columnCount: this.getColunmCount(),
       columnWidth: props.cellWidth,
       spacer: props.spacer
     });
   }
+
+  getContentWidth = () => {
+    const { width, spacer } = this.props;
+    const contentWidth = width - (spacer * 2 + 8);
+    return contentWidth > 0 ? contentWidth : 0;
+  };
+  getColunmCount = () => {
+    const { cellWidth, spacer } = this.props;
+    return Math.floor((this.getContentWidth() + 8) / (cellWidth + spacer)) || 1;
+  };
 
   componentDidUpdate(prevProps: Props) {
     if (
@@ -56,9 +66,7 @@ class MasonryComponent extends React.Component<Props, { currentPage: number }> {
       prevProps.width !== this.props.width
     ) {
       this.cellPositioner.reset({
-        columnCount: Math.floor(
-          this.props.width / (this.props.cellWidth + this.props.spacer)
-        ),
+        columnCount: this.getColunmCount(),
         columnWidth: this.props.cellWidth,
         spacer: this.props.spacer
       });

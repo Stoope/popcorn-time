@@ -20,7 +20,9 @@ const styles: StyleRulesCallback = () => ({
     paddingTop: '150%'
   },
   card: {
-    width: 200
+    width: 'calc(100% - 6px)',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   }
 });
 
