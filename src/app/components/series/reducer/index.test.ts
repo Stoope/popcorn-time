@@ -11,7 +11,31 @@ describe('series reducer', () => {
       },
       data: [],
       error: null,
+      scrollTopPosition: 0,
       hasMore: true
+    });
+  });
+  it('should handle CHANGE_SERIES_SCROLL_POSITION', () => {
+    expect(
+      reducer(
+        {
+          isLoading: false,
+          filter: {
+            sort: 'name',
+            order: -1
+          },
+          data: [],
+          error: 'ERROR',
+          hasMore: false,
+          scrollTopPosition: 0
+        },
+        {
+          type: constants.CHANGE_SERIES_SCROLL_POSITION,
+          payload: 10
+        }
+      )
+    ).toMatchObject({
+      scrollTopPosition: 10
     });
   });
   it('should handle LOAD_SERIES', () => {
@@ -55,16 +79,11 @@ describe('series reducer', () => {
           type: constants.RESET_SERIES
         }
       )
-    ).toEqual({
-      isLoading: false,
-      filter: {
-        sort: 'rating',
-        order: -1
-      },
-      data: [],
-      error: null,
-      hasMore: true
-    });
+    ).toEqual(
+      reducer(undefined, {
+        type: ''
+      })
+    );
   });
   it('should handle LOAD_SERIES_SUCCESS', () => {
     const series = [

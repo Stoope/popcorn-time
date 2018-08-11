@@ -8,9 +8,11 @@ type Props = {
   spacer?: number;
   hasMore: boolean;
   isLoadingItems: boolean;
+  scrollTopPosition: number;
   loadMore: (page: number) => void;
   cellRenderer: (index: number) => JSX.Element;
   keyMapper: (index: number) => any;
+  changeScrollPosition: (scrollTopPosition: number) => any;
 };
 
 class GridComponent extends React.Component<Props> {
@@ -23,6 +25,8 @@ class GridComponent extends React.Component<Props> {
       hasMore,
       loadMore,
       isLoadingItems,
+      scrollTopPosition,
+      changeScrollPosition,
       keyMapper
     } = this.props;
     return (
@@ -30,6 +34,8 @@ class GridComponent extends React.Component<Props> {
         {({ height, width }) => (
           <Masonry
             keyMapper={keyMapper}
+            scrollTopPosition={scrollTopPosition}
+            changeScrollPosition={changeScrollPosition}
             isLoadingItems={isLoadingItems}
             total={total}
             width={width}

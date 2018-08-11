@@ -4,6 +4,8 @@ import { State } from 'types';
 
 export const loadSeries = (payload: number) =>
   action(constants.LOAD_SERIES, payload);
+export const changeSeriesScrollPosition = (payload: number) =>
+  action(constants.CHANGE_SERIES_SCROLL_POSITION, payload);
 export const resetSeries = () => action(constants.RESET_SERIES);
 export const loadSeriesSuccess = (payload: {
   series: State['seriesReducer']['data'];

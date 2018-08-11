@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Grid from './Grid';
 
 class SeriesComponent extends React.Component<{}> {
   render() {
-    return <Grid />;
+    return (
+      <Fragment>
+        <Grid />
+      </Fragment>
+    );
   }
 }
 

@@ -14,12 +14,14 @@ type Props = {
   width: number;
   total: number;
   spacer: number;
+  scrollTopPosition: number;
   cellWidth: number;
   hasMore: boolean;
   isLoadingItems: boolean;
   loadMore: (page: number) => void;
   cellRenderer: (index: number) => JSX.Element;
   keyMapper: (index: number) => any;
+  changeScrollPosition: (scrollTopPosition: number) => any;
   classes: Record<string, string>;
 };
 const styles: StyleRulesCallback = theme => ({
@@ -30,14 +32,17 @@ const styles: StyleRulesCallback = theme => ({
   }
 });
 
-class MasonryComponent extends React.Component<Props, { currentPage: number }> {
+class MasonryComponent extends React.Component<
+  Props,
+  { currentPage: number; isFirstCellRendered: boolean }
+> {
   cache: CellMeasurerCache;
   cellPositioner: Positioner;
-  masonryRef: Masonry | null = null;
+  masonryRef: Masonry & { _scrollingContainer?: HTMLDivElement } | null = null;
 
   constructor(props: Props) {
     super(props);
-    this.state = { currentPage: 1 };
+    this.state = { currentPage: 1, isFirstCellRendered: false };
     this.cache = new CellMeasurerCache({
       defaultWidth: props.cellWidth,
       fixedWidth: true
@@ -65,6 +70,13 @@ class MasonryComponent extends React.Component<Props, { currentPage: number }> {
       prevProps.height !== this.props.height ||
       prevProps.width !== this.props.width
     ) {
+      if (!this.state.isFirstCellRendered) {
+        this.setState({ isFirstCellRendered: true }, () => {
+          if (this.masonryRef && this.masonryRef._scrollingContainer) {
+            this.masonryRef._scrollingContainer.scrollTop = this.props.scrollTopPosition;
+          }
+        });
+      }
       this.cellPositioner.reset({
         columnCount: this.getColunmCount(),
         columnWidth: this.props.cellWidth,
@@ -78,6 +90,9 @@ class MasonryComponent extends React.Component<Props, { currentPage: number }> {
   };
 
   onScroll: OnScrollCallback = ({ clientHeight, scrollHeight, scrollTop }) => {
+    if (clientHeight !== 0) {
+      this.props.changeScrollPosition(scrollTop);
+    }
     const offset = scrollHeight - scrollTop - clientHeight;
     if (offset < 500 && !this.props.isLoadingItems) {
       this.props.loadMore(this.state.currentPage);

@@ -63,6 +63,7 @@ export type State = {
   }>;
   error: string | null;
   hasMore: boolean;
+  scrollTopPosition: number;
 };
 
 const initialState: GlobalState['seriesReducer'] = {
@@ -73,6 +74,7 @@ const initialState: GlobalState['seriesReducer'] = {
   },
   data: [],
   error: null,
+  scrollTopPosition: 0,
   hasMore: true
 };
 
@@ -103,6 +105,11 @@ const reducer = (
         error: action.payload,
         data: [],
         hasMore: false
+      };
+    case constants.CHANGE_SERIES_SCROLL_POSITION:
+      return {
+        ...state,
+        scrollTopPosition: action.payload
       };
     case constants.LOAD_SERIES_SUCCESS:
       return {

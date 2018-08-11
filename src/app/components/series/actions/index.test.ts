@@ -81,6 +81,13 @@ describe('actions', () => {
     };
     expect(actions.changeSeriesFilter(filter)).toEqual(expectedAction);
   });
+  it('should create an action CHANGE_SERIES_SCROLL_POSITION', () => {
+    const expectedAction = {
+      type: types.CHANGE_SERIES_SCROLL_POSITION,
+      payload: 5
+    };
+    expect(actions.changeSeriesScrollPosition(5)).toEqual(expectedAction);
+  });
   it('should create an action RESET_SERIES', () => {
     const expectedAction = {
       type: types.RESET_SERIES
