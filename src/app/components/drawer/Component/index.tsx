@@ -42,6 +42,12 @@ const styles: StyleRulesCallback = theme => ({
       width: theme.spacing.unit * 9
     }
   },
+  drawerContainer: {
+    width: theme.spacing.unit * 7,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing.unit * 9
+    }
+  },
   activeItem: {
     backgroundColor: theme.palette.action.selected
   }
@@ -52,33 +58,35 @@ class DrawerComponent extends React.Component<Props> {
   render() {
     const { isDrawerOpen, classes, location } = this.props;
     return (
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: classNames(
-            classes.drawerPaper,
-            !isDrawerOpen && classes.drawerPaperClose
-          )
-        }}
-        open={isDrawerOpen}
-      >
-        <Header />
-        <Divider />
-        <List className={classes.list}>
-          <Movies
-            location={location}
-            navigateTo={this.navigateTo}
-            activeItemClassName={classes.activeItem}
-          />
-          <Shows
-            location={location}
-            navigateTo={this.navigateTo}
-            activeItemClassName={classes.activeItem}
-          />
+      <div className={classes.drawerContainer}>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: classNames(
+              classes.drawerPaper,
+              !isDrawerOpen && classes.drawerPaperClose
+            )
+          }}
+          open={isDrawerOpen}
+        >
+          <Header />
           <Divider />
-          <Settings activeItemClassName={classes.activeItem} />
-        </List>
-      </Drawer>
+          <List className={classes.list}>
+            <Movies
+              location={location}
+              navigateTo={this.navigateTo}
+              activeItemClassName={classes.activeItem}
+            />
+            <Shows
+              location={location}
+              navigateTo={this.navigateTo}
+              activeItemClassName={classes.activeItem}
+            />
+            <Divider />
+            <Settings activeItemClassName={classes.activeItem} />
+          </List>
+        </Drawer>
+      </div>
     );
   }
 }
