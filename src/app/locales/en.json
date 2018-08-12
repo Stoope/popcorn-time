@@ -1,11 +1,14 @@
 {
-  "app.DialogHeader.title": "Settings",
   "app.Drawer.settings": "Settings",
   "app.Drawer.series": "Series",
   "app.Drawer.movies": "Movies",
-  "app.SettingsBody.appearance": "Appearance",
   "app.series.season": "{seasonsCount, number} {seasonsCount, plural, one {season} other {seasons}}",
+  "app.series.title": "Series",
+  "app.SettingsBody.appearance": "Appearance",
   "app.SettingsBody.nightMode": "Night mode",
+  "app.SettingsBody.ontSize": "Font size",
+  "app.SettingsBody.title.primary": "Primary color",
+  "app.SettingsBody.title.secondary": "Secondary color",
   "app.SettingsBody.snades": "Snades:",
   "app.SettingsBody.red": "Red",
   "app.SettingsBody.pink": "Pink",
@@ -23,7 +26,6 @@
   "app.SettingsBody.orange": "Orange",
   "app.SettingsBody.deepOrange": "Deep orange",
   "app.SettingsBody.brown": "Brown",
-  "app.SettingsBody.ontSize": "Font size",
-  "app.SettingsBody.title.primary": "Primary color",
-  "app.SettingsBody.title.secondary": "Secondary color"
+  "app.DialogHeader.title": "Settings",
+  "app.series.searchPlaceholder": "Search…"
 }

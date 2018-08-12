@@ -94,7 +94,7 @@ class MasonryComponent extends React.Component<
       this.props.changeScrollPosition(scrollTop);
     }
     const offset = scrollHeight - scrollTop - clientHeight;
-    if (offset < 500 && !this.props.isLoadingItems) {
+    if (offset < 500 && !this.props.isLoadingItems && this.props.hasMore) {
       this.props.loadMore(this.state.currentPage);
       this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }));
     }
