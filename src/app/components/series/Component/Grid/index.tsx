@@ -10,6 +10,7 @@ type Props = {
   data: State['seriesReducer']['data'];
   isLoading: State['seriesReducer']['isLoading'];
   scrollTopPosition: State['seriesReducer']['scrollTopPosition'];
+  filter: State['seriesReducer']['filter'];
   loadSeries: typeof seriesActions.loadSeries;
   changeScrollPosition: typeof seriesActions.changeSeriesScrollPosition;
 };
@@ -25,10 +26,12 @@ class GridComponent extends React.Component<Props> {
       loadSeries,
       changeScrollPosition,
       scrollTopPosition,
+      filter,
       isLoading
     } = this.props;
     return (
       <Grid
+        key={JSON.stringify(filter)}
         keyMapper={this.keyMapper}
         changeScrollPosition={changeScrollPosition}
         scrollTopPosition={scrollTopPosition}
@@ -47,6 +50,7 @@ export default connect(
   (state: State) => ({
     hasMore: state.seriesReducer.hasMore,
     data: state.seriesReducer.data,
+    filter: state.seriesReducer.filter,
     scrollTopPosition: state.seriesReducer.scrollTopPosition,
     isLoading: state.seriesReducer.isLoading
   }),

@@ -1,14 +1,27 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import Grid from './Grid';
+import PageBar from './PageBar';
 
-class SeriesComponent extends React.Component<{}> {
+const styles: StyleRulesCallback = () => ({
+  root: {
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column'
+  }
+});
+
+class SeriesComponent extends React.Component<{
+  classes: Record<string, string>;
+}> {
   render() {
     return (
-      <Fragment>
+      <div className={this.props.classes.root}>
+        <PageBar />
         <Grid />
-      </Fragment>
+      </div>
     );
   }
 }
 
-export default SeriesComponent;
+export default withStyles(styles)(SeriesComponent);
