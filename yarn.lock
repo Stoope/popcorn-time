@@ -185,6 +185,12 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-highlight-words@^0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@types/react-highlight-words/-/react-highlight-words-0.11.1.tgz#d5635a59f6fc0e89b6674d9037d561768bcfc305"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-intl@^2.3.8":
   version "2.3.9"
   resolved "https://registry.yarnpkg.com/@types/react-intl/-/react-intl-2.3.9.tgz#47dfc2c4ff82c938ffb0ecaa1bc9f2f449f191cc"
@@ -3496,6 +3502,10 @@ hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
 
+highlight-words-core@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/highlight-words-core/-/highlight-words-core-1.2.0.tgz#232bec301cbf2a4943d335dc748ce70e9024f3b1"
+
 history@^4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/history/-/history-4.7.2.tgz#22b5c7f31633c5b8021c7f4a8a954ac139ee8d5b"
@@ -4987,6 +4997,10 @@ mem@^1.1.0:
   resolved "https://registry.yarnpkg.com/mem/-/mem-1.1.0.tgz#5edd52b485ca1d900fe64895505399a0dfa45f76"
   dependencies:
     mimic-fn "^1.0.0"
+
+memoize-one@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.0.0.tgz#fc5e2f1427a216676a62ec652cf7398cfad123db"
 
 memoizee@^0.4.13:
   version "0.4.13"
@@ -6602,6 +6616,14 @@ react-event-listener@^0.6.2:
     "@babel/runtime" "7.0.0-beta.42"
     prop-types "^15.6.0"
     warning "^4.0.1"
+
+react-highlight-words@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-highlight-words/-/react-highlight-words-0.12.0.tgz#d631fe717412571a47c97c8abcb9c41742ccb648"
+  dependencies:
+    highlight-words-core "^1.2.0"
+    memoize-one "^4.0.0"
+    prop-types "^15.5.8"
 
 react-intl@^2.4.0:
   version "2.4.0"

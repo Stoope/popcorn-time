@@ -40,7 +40,9 @@ class GridComponent extends React.Component<Props> {
         loadMore={loadShows}
         hasMore={hasMore}
         cellWidth={206}
-        cellRenderer={index => <Card item={data[index]} />}
+        cellRenderer={index => (
+          <Card searchValue={filter.keywords || ''} item={data[index]} />
+        )}
       />
     );
   }

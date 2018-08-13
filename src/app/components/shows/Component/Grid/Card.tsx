@@ -6,13 +6,21 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
+import Highlighter from 'react-highlight-words';
+import {
+  withStyles,
+  StyleRulesCallback,
+  WithTheme,
+  withTheme
+} from '@material-ui/core/styles';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 type Props = {
   item: State['showsReducer']['data'][0];
   classes: Record<string, string>;
-} & InjectedIntlProps;
+  searchValue: string;
+} & InjectedIntlProps &
+  WithTheme;
 
 const styles: StyleRulesCallback = () => ({
   media: {
@@ -38,7 +46,9 @@ class CardComponent extends React.Component<Props> {
         num_seasons
       },
       classes,
-      intl
+      searchValue,
+      intl,
+      theme
     } = this.props;
     return (
       <div className={classes.card}>
@@ -48,7 +58,16 @@ class CardComponent extends React.Component<Props> {
             <Grid container={true} spacing={8}>
               <Grid item={true} xs={12}>
                 <Typography title={title} noWrap={true} variant="subheading">
-                  {title}
+                  <Highlighter
+                    highlightStyle={{
+                      backgroundColor: theme.palette.secondary.main,
+                      color: theme.palette.secondary.contrastText
+                    }}
+                    highlightClassName="searched-keywords"
+                    searchWords={searchValue ? searchValue.split(' ') : []}
+                    autoEscape={true}
+                    textToHighlight={title}
+                  />
                 </Typography>
               </Grid>
               <Grid item={true} xs={6}>
@@ -78,4 +97,4 @@ class CardComponent extends React.Component<Props> {
   }
 }
 
-export default withStyles(styles)(injectIntl(CardComponent));
+export default withStyles(styles)(injectIntl(withTheme()(CardComponent)));
