@@ -7,9 +7,10 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import classNames from 'classnames';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
+import { State } from 'types';
 
 type Props = {
-  order: 1 | -1;
+  order: State['showsReducer']['filter']['order'];
   changeFilter: typeof showsActions.changeShowsFilter;
   classes: Record<string, string>;
 } & InjectedIntlProps;
