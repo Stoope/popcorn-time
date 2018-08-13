@@ -9,7 +9,7 @@ export type State = {
     readonly theme: ThemeOptions;
     readonly locale?: 'en' | 'ru';
     readonly proxy: AxiosProxyConfig | false;
-    readonly series: {
+    readonly shows: {
       APIs: Array<{ url: string }>;
     };
   };
@@ -21,7 +21,7 @@ const initialState: GlobalState['settingsReducer'] = {
     theme: { typography: { htmlFontSize: 16 } },
     locale: 'en',
     proxy: false,
-    series: {
+    shows: {
       APIs: [
         {
           url: 'http://eztv.is/api/'

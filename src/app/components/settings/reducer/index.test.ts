@@ -8,7 +8,7 @@ describe('settings reducer', () => {
         theme: { typography: { htmlFontSize: 16 } },
         locale: 'en',
         proxy: false,
-        series: {
+        shows: {
           APIs: [
             {
               url: 'http://eztv.is/api/'

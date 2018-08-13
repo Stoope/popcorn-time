@@ -1,21 +1,21 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  app_series_season: {
-    id: 'app.series.season',
+  app_shows_season: {
+    id: 'app.shows.season',
     defaultMessage:
       '{seasonsCount, number} {seasonsCount, plural, one {season} other {seasons}}',
     description: 'Form of season word(plural)'
   },
-  app_series_title: {
-    id: 'app.series.title',
-    defaultMessage: 'Series',
-    description: 'Series title'
+  app_shows_title: {
+    id: 'app.shows.title',
+    defaultMessage: 'Shows',
+    description: 'Shows title'
   },
-  app_series_searchPlaceholder: {
-    id: 'app.series.searchPlaceholder',
+  app_shows_searchPlaceholder: {
+    id: 'app.shows.searchPlaceholder',
     defaultMessage: 'Search…',
-    description: 'Search series placeholder'
+    description: 'Search shows placeholder'
   }
 });
 

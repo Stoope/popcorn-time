@@ -14,14 +14,14 @@ type Props = {
 } & InjectedIntlProps;
 
 class Shows extends React.Component<Props> {
-  componentPathName = '/series';
-  navigateToSeries = () => this.props.navigateTo(this.componentPathName);
+  componentPathName = '/shows';
+  navigateToShows = () => this.props.navigateTo(this.componentPathName);
   render() {
     const { intl, activeItemClassName, location } = this.props;
     return (
       <ListItem
         button={true}
-        onClick={this.navigateToSeries}
+        onClick={this.navigateToShows}
         className={
           location.pathname === this.componentPathName
             ? activeItemClassName
@@ -32,7 +32,7 @@ class Shows extends React.Component<Props> {
           <LiveTv />
         </ListItemIcon>
         <ListItemText
-          primary={intl.formatMessage(messages.drawer_Drawer_series)}
+          primary={intl.formatMessage(messages.drawer_Drawer_shows)}
         />
       </ListItem>
     );

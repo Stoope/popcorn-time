@@ -66,7 +66,7 @@ export type State = {
   scrollTopPosition: number;
 };
 
-const initialState: GlobalState['seriesReducer'] = {
+const initialState: GlobalState['showsReducer'] = {
   isLoading: false,
   filter: {
     sort: 'rating',
@@ -79,48 +79,48 @@ const initialState: GlobalState['seriesReducer'] = {
 };
 
 const reducer = (
-  state: GlobalState['seriesReducer'] = initialState,
+  state: GlobalState['showsReducer'] = initialState,
   action: Actions
-): GlobalState['seriesReducer'] => {
+): GlobalState['showsReducer'] => {
   switch (action.type) {
-    case constants.LOAD_SERIES:
+    case constants.LOAD_SHOWS:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case constants.RESET_SERIES:
+    case constants.RESET_SHOWS:
       return {
         ...initialState
       };
-    case constants.CHANGE_SERIES_FILTER:
+    case constants.CHANGE_SHOWS_FILTER:
       return {
         ...state,
         filter: { ...state.filter, ...action.payload },
         data: []
       };
-    case constants.LOAD_SERIES_ERROR:
+    case constants.LOAD_SHOWS_ERROR:
       return {
         ...state,
         error: action.payload,
         data: [],
         hasMore: false
       };
-    case constants.CHANGE_SERIES_SCROLL_POSITION:
+    case constants.CHANGE_SHOWS_SCROLL_POSITION:
       return {
         ...state,
         scrollTopPosition: action.payload
       };
-    case constants.LOAD_SERIES_SUCCESS:
+    case constants.LOAD_SHOWS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         data: [
           ...state.data.filter(
             ({ _id }) =>
-              action.payload.series.find(item => item._id === _id) === undefined
+              action.payload.shows.find(item => item._id === _id) === undefined
           ),
-          ...action.payload.series
+          ...action.payload.shows
         ],
         hasMore: action.payload.hasMore
       };

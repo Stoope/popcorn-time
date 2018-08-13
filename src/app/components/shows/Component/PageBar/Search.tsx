@@ -1,6 +1,6 @@
 import React from 'react';
 import messages from '../index.messages';
-import { seriesActions } from '~/components/series';
+import { showsActions } from '~/components/shows';
 import keycode from 'keycode';
 import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
@@ -11,7 +11,7 @@ import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 
 type Props = {
   value: string;
-  changeFilter: typeof seriesActions.changeSeriesFilter;
+  changeFilter: typeof showsActions.changeShowsFilter;
   classes: Record<string, string>;
 } & InjectedIntlProps;
 
@@ -93,9 +93,7 @@ class GridComponent extends React.Component<Props> {
         </div>
         <Input
           disableUnderline={true}
-          placeholder={intl.formatMessage(
-            messages.app_series_searchPlaceholder
-          )}
+          placeholder={intl.formatMessage(messages.app_shows_searchPlaceholder)}
           onChange={this.changeFilter}
           value={value}
           inputRef={this.inputRef}

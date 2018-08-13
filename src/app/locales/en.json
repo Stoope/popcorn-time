@@ -1,9 +1,9 @@
 {
   "app.Drawer.settings": "Settings",
-  "app.Drawer.series": "Series",
+  "app.Drawer.shows": "Shows",
   "app.Drawer.movies": "Movies",
-  "app.series.season": "{seasonsCount, number} {seasonsCount, plural, one {season} other {seasons}}",
-  "app.series.title": "Series",
+  "app.shows.season": "{seasonsCount, number} {seasonsCount, plural, one {season} other {seasons}}",
+  "app.shows.title": "Shows",
   "app.SettingsBody.appearance": "Appearance",
   "app.SettingsBody.nightMode": "Night mode",
   "app.SettingsBody.ontSize": "Font size",
@@ -27,5 +27,5 @@
   "app.SettingsBody.deepOrange": "Deep orange",
   "app.SettingsBody.brown": "Brown",
   "app.DialogHeader.title": "Settings",
-  "app.series.searchPlaceholder": "Search…"
+  "app.shows.searchPlaceholder": "Search…"
 }

@@ -10,7 +10,7 @@ import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 type Props = {
-  item: State['seriesReducer']['data'][0];
+  item: State['showsReducer']['data'][0];
   classes: Record<string, string>;
 } & InjectedIntlProps;
 
@@ -58,14 +58,14 @@ class CardComponent extends React.Component<Props> {
               </Grid>
               <Grid item={true} xs={6}>
                 <Typography
-                  title={intl.formatMessage(messages.app_series_season, {
+                  title={intl.formatMessage(messages.app_shows_season, {
                     seasonsCount: num_seasons
                   })}
                   noWrap={true}
                   variant="caption"
                   align="right"
                 >
-                  {intl.formatMessage(messages.app_series_season, {
+                  {intl.formatMessage(messages.app_shows_season, {
                     seasonsCount: num_seasons
                   })}
                 </Typography>

@@ -1,7 +1,7 @@
 import reducer from './';
 import * as constants from '../constants';
 
-describe('series reducer', () => {
+describe('shows reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, { type: null })).toEqual({
       isLoading: false,
@@ -15,7 +15,7 @@ describe('series reducer', () => {
       hasMore: true
     });
   });
-  it('should handle CHANGE_SERIES_SCROLL_POSITION', () => {
+  it('should handle CHANGE_SHOWS_SCROLL_POSITION', () => {
     expect(
       reducer(
         {
@@ -30,7 +30,7 @@ describe('series reducer', () => {
           scrollTopPosition: 0
         },
         {
-          type: constants.CHANGE_SERIES_SCROLL_POSITION,
+          type: constants.CHANGE_SHOWS_SCROLL_POSITION,
           payload: 10
         }
       )
@@ -38,7 +38,7 @@ describe('series reducer', () => {
       scrollTopPosition: 10
     });
   });
-  it('should handle LOAD_SERIES', () => {
+  it('should handle LOAD_SHOWS', () => {
     expect(
       reducer(
         {
@@ -52,7 +52,7 @@ describe('series reducer', () => {
           hasMore: false
         },
         {
-          type: constants.LOAD_SERIES,
+          type: constants.LOAD_SHOWS,
           payload: 10
         }
       )
@@ -62,7 +62,7 @@ describe('series reducer', () => {
       hasMore: false
     });
   });
-  it('should handle RESET_SERIES', () => {
+  it('should handle RESET_SHOWS', () => {
     expect(
       reducer(
         {
@@ -76,7 +76,7 @@ describe('series reducer', () => {
           hasMore: false
         },
         {
-          type: constants.RESET_SERIES
+          type: constants.RESET_SHOWS
         }
       )
     ).toEqual(
@@ -85,8 +85,8 @@ describe('series reducer', () => {
       })
     );
   });
-  it('should handle LOAD_SERIES_SUCCESS', () => {
-    const series = [
+  it('should handle LOAD_SHOWS_SUCCESS', () => {
+    const shows = [
       {
         _id: 'tt4272070',
         imdb_id: 'tt4272070',
@@ -141,18 +141,18 @@ describe('series reducer', () => {
           isLoading: true
         },
         {
-          type: constants.LOAD_SERIES_SUCCESS,
-          payload: { series, hasMore: true }
+          type: constants.LOAD_SHOWS_SUCCESS,
+          payload: { shows, hasMore: true }
         }
       )
     ).toMatchObject({
       isLoading: false,
-      data: series,
+      data: shows,
       hasMore: true
     });
   });
-  it('should handle LOAD_SERIES_SUCCESS add to exist data', () => {
-    const existSeries = [
+  it('should handle LOAD_SHOWS_SUCCESS add to exist data', () => {
+    const existShows = [
       {
         _id: 'tt4272070',
         imdb_id: 'tt4272070',
@@ -175,7 +175,7 @@ describe('series reducer', () => {
         }
       }
     ];
-    const series = [
+    const shows = [
       {
         _id: 'tt7949730',
         imdb_id: 'tt7949730',
@@ -209,25 +209,25 @@ describe('series reducer', () => {
             sort: 'rating',
             order: -1
           },
-          data: [...existSeries],
+          data: [...existShows],
           error: null,
           hasMore: false
         },
         {
-          type: constants.LOAD_SERIES_SUCCESS,
+          type: constants.LOAD_SHOWS_SUCCESS,
           payload: {
-            series,
+            shows,
             hasMore: true
           }
         }
       )
     ).toMatchObject({
-      data: [...existSeries, ...series],
+      data: [...existShows, ...shows],
       hasMore: true
     });
   });
-  it('should handle LOAD_SERIES_SUCCESS remove duplicates', () => {
-    const existSeries = [
+  it('should handle LOAD_SHOWS_SUCCESS remove duplicates', () => {
+    const existShows = [
       {
         _id: 'tt4272070',
         imdb_id: 'tt4272070',
@@ -274,7 +274,7 @@ describe('series reducer', () => {
         }
       }
     ];
-    const series = [
+    const shows = [
       {
         _id: 'tt4272070',
         imdb_id: 'tt4272070',
@@ -305,14 +305,14 @@ describe('series reducer', () => {
             sort: 'rating',
             order: -1
           },
-          data: [...existSeries],
+          data: [...existShows],
           error: null,
           hasMore: false
         },
         {
-          type: constants.LOAD_SERIES_SUCCESS,
+          type: constants.LOAD_SHOWS_SUCCESS,
           payload: {
-            series,
+            shows,
             hasMore: true
           }
         }
@@ -343,12 +343,12 @@ describe('series reducer', () => {
             hated: 100
           }
         },
-        ...series
+        ...shows
       ],
       hasMore: true
     });
   });
-  it('should handle LOAD_SERIES_ERROR', () => {
+  it('should handle LOAD_SHOWS_ERROR', () => {
     const error = 'ERROR';
     expect(
       reducer(
@@ -386,7 +386,7 @@ describe('series reducer', () => {
           hasMore: true
         },
         {
-          type: constants.LOAD_SERIES_ERROR,
+          type: constants.LOAD_SHOWS_ERROR,
           payload: error
         }
       )
@@ -396,7 +396,7 @@ describe('series reducer', () => {
       hasMore: false
     });
   });
-  it('should handle CHANGE_SERIES_FILTER', () => {
+  it('should handle CHANGE_SHOWS_FILTER', () => {
     const filter = { keywords: 'SHOW', page: 10 };
     expect(
       reducer(
@@ -434,7 +434,7 @@ describe('series reducer', () => {
           hasMore: false
         },
         {
-          type: constants.CHANGE_SERIES_FILTER,
+          type: constants.CHANGE_SHOWS_FILTER,
           payload: filter
         }
       )

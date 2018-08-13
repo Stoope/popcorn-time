@@ -15,13 +15,13 @@ type Props = {
 
 class Movies extends React.Component<Props> {
   componentPathName = '/movies';
-  navigateToSeries = () => this.props.navigateTo(this.componentPathName);
+  navigateToShows = () => this.props.navigateTo(this.componentPathName);
   render() {
     const { intl, activeItemClassName, location } = this.props;
     return (
       <ListItem
         button={true}
-        onClick={this.navigateToSeries}
+        onClick={this.navigateToShows}
         className={
           location.pathname === this.componentPathName
             ? activeItemClassName

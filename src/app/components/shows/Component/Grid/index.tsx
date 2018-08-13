@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { State } from 'types';
-import { seriesActions } from '~/components/series';
+import { showsActions } from '~/components/shows';
 import Grid from '~/components/Grid';
 import Card from './Card';
 
 type Props = {
-  hasMore: State['seriesReducer']['hasMore'];
-  data: State['seriesReducer']['data'];
-  isLoading: State['seriesReducer']['isLoading'];
-  scrollTopPosition: State['seriesReducer']['scrollTopPosition'];
-  filter: State['seriesReducer']['filter'];
-  loadSeries: typeof seriesActions.loadSeries;
-  changeScrollPosition: typeof seriesActions.changeSeriesScrollPosition;
+  hasMore: State['showsReducer']['hasMore'];
+  data: State['showsReducer']['data'];
+  isLoading: State['showsReducer']['isLoading'];
+  scrollTopPosition: State['showsReducer']['scrollTopPosition'];
+  filter: State['showsReducer']['filter'];
+  loadShows: typeof showsActions.loadShows;
+  changeScrollPosition: typeof showsActions.changeShowsScrollPosition;
 };
 
 class GridComponent extends React.Component<Props> {
@@ -23,7 +23,7 @@ class GridComponent extends React.Component<Props> {
     const {
       hasMore,
       data,
-      loadSeries,
+      loadShows,
       changeScrollPosition,
       scrollTopPosition,
       filter,
@@ -37,7 +37,7 @@ class GridComponent extends React.Component<Props> {
         scrollTopPosition={scrollTopPosition}
         isLoadingItems={isLoading}
         total={data.length}
-        loadMore={loadSeries}
+        loadMore={loadShows}
         hasMore={hasMore}
         cellWidth={206}
         cellRenderer={index => <Card item={data[index]} />}
@@ -48,14 +48,14 @@ class GridComponent extends React.Component<Props> {
 
 export default connect(
   (state: State) => ({
-    hasMore: state.seriesReducer.hasMore,
-    data: state.seriesReducer.data,
-    filter: state.seriesReducer.filter,
-    scrollTopPosition: state.seriesReducer.scrollTopPosition,
-    isLoading: state.seriesReducer.isLoading
+    hasMore: state.showsReducer.hasMore,
+    data: state.showsReducer.data,
+    filter: state.showsReducer.filter,
+    scrollTopPosition: state.showsReducer.scrollTopPosition,
+    isLoading: state.showsReducer.isLoading
   }),
   {
-    loadSeries: seriesActions.loadSeries,
-    changeScrollPosition: seriesActions.changeSeriesScrollPosition
+    loadShows: showsActions.loadShows,
+    changeScrollPosition: showsActions.changeShowsScrollPosition
   }
 )(GridComponent);

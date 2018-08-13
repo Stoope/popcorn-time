@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { State } from 'types';
-import { seriesActions } from '~/components/series';
+import { showsActions } from '~/components/shows';
 import AppBar from '@material-ui/core/AppBar';
 import messages from '../index.messages';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,8 +11,8 @@ import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import Search from './Search';
 
 type Props = {
-  filter: State['seriesReducer']['filter'];
-  changeFilter: typeof seriesActions.changeSeriesFilter;
+  filter: State['showsReducer']['filter'];
+  changeFilter: typeof showsActions.changeShowsFilter;
   classes: Record<string, string>;
 } & InjectedIntlProps;
 
@@ -34,7 +34,7 @@ class PageBarComponent extends React.Component<Props> {
       <AppBar position="static" color="default">
         <Toolbar>
           <Typography variant="title" color="inherit">
-            {intl.formatMessage(messages.app_series_title)}
+            {intl.formatMessage(messages.app_shows_title)}
           </Typography>
           <div className={classes.grow} />
           <Search value={keywords} changeFilter={changeFilter} />
@@ -46,9 +46,9 @@ class PageBarComponent extends React.Component<Props> {
 
 export default connect(
   (state: State) => ({
-    filter: state.seriesReducer.filter
+    filter: state.showsReducer.filter
   }),
   {
-    changeFilter: seriesActions.changeSeriesFilter
+    changeFilter: showsActions.changeShowsFilter
   }
 )(withStyles(styles)(injectIntl(PageBarComponent)));

@@ -1,0 +1,7 @@
+export const LOAD_SHOWS = 'shows/LOAD_SHOWS';
+export const LOAD_SHOWS_SUCCESS = 'shows/LOAD_SHOWS_SUCCESS';
+export const LOAD_SHOWS_ERROR = 'shows/LOAD_SHOWS_ERROR';
+export const CHANGE_SHOWS_FILTER = 'shows/CHANGE_SHOWS_FILTER';
+export const RESET_SHOWS = 'shows/RESET_SHOWS';
+export const CHANGE_SHOWS_SCROLL_POSITION =
+  'shows/CHANGE_SHOWS_SCROLL_POSITION';

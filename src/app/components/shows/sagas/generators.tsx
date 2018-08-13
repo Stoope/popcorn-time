@@ -8,14 +8,14 @@ import { memoizePromise } from '~/helpers/memoize';
 const getPage = memoizePromise(popcornAPIShowsProvider.getPage);
 const getPages = memoizePromise(popcornAPIShowsProvider.getPages);
 
-export function* SERIES_LOAD_SERIES({
+export function* SHOWS_LOAD_SHOWS({
   payload
-}: ActionType<typeof actions.loadSeries>) {
+}: ActionType<typeof actions.loadShows>) {
   try {
     const proxy = yield select(
       (props: State) => props.settingsReducer.config.proxy
     );
-    const filter = yield select((props: State) => props.seriesReducer.filter);
+    const filter = yield select((props: State) => props.showsReducer.filter);
     const pages = yield call(getPages);
     const data = yield call(
       getPage,
@@ -26,12 +26,12 @@ export function* SERIES_LOAD_SERIES({
       proxy
     );
     yield put(
-      actions.loadSeriesSuccess({
-        series: data,
+      actions.loadShowsSuccess({
+        shows: data,
         hasMore: payload < pages.length
       })
     );
   } catch (error) {
-    yield put(actions.loadSeriesError(error));
+    yield put(actions.loadShowsError(error));
   }
 }

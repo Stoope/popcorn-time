@@ -6,23 +6,23 @@ import {
   settingsActions
 } from '~/components/settings';
 import { drawerReducer, DrawerState, drawerActions } from '~/components/drawer';
-import { seriesReducer, SeriesState, seriesActions } from '~/components/series';
+import { showsReducer, ShowsState, showsActions } from '~/components/shows';
 
 export type Actions =
   | ActionType<typeof settingsActions>
   | ActionType<typeof drawerActions>
-  | ActionType<typeof seriesActions>
+  | ActionType<typeof showsActions>
   | { type: null };
 export type State = {
   settingsReducer: SettingsState;
   drawerReducer: DrawerState;
-  seriesReducer: SeriesState;
+  showsReducer: ShowsState;
 };
 
 const reducers = {
   settingsReducer,
   drawerReducer,
-  seriesReducer
+  showsReducer
 };
 
 export default combineReducers<State, Actions>(reducers);

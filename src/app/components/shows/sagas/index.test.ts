@@ -3,15 +3,15 @@ import * as actions from '../actions';
 import { cloneableGenerator } from 'redux-saga/utils';
 import { put } from 'redux-saga/effects';
 
-describe('series reducer', () => {
-  const generator = cloneableGenerator(generators.SERIES_LOAD_SERIES)(
-    actions.loadSeries(2)
+describe('shows reducer', () => {
+  const generator = cloneableGenerator(generators.SHOWS_LOAD_SHOWS)(
+    actions.loadShows(2)
   );
   generator.next();
   generator.next(false);
 
-  it('should load series on success (has not more pages)', () => {
-    const series = [
+  it('should load shows on success (has not more pages)', () => {
+    const shows = [
       {
         _id: 'tt4272070',
         imdb_id: 'tt4272070',
@@ -61,13 +61,13 @@ describe('series reducer', () => {
     const clone = generator.clone();
     clone.next({});
     clone.next(['', '']);
-    expect(clone.next(series).value).toEqual(
-      put(actions.loadSeriesSuccess({ series, hasMore: false }))
+    expect(clone.next(shows).value).toEqual(
+      put(actions.loadShowsSuccess({ shows, hasMore: false }))
     );
   });
 
-  it('should load series on success (has more pages)', () => {
-    const series = [
+  it('should load shows on success (has more pages)', () => {
+    const shows = [
       {
         _id: 'tt4272070',
         imdb_id: 'tt4272070',
@@ -117,13 +117,13 @@ describe('series reducer', () => {
     const clone = generator.clone();
     clone.next({});
     clone.next(['', '', '']);
-    expect(clone.next(series).value).toEqual(
-      put(actions.loadSeriesSuccess({ series, hasMore: true }))
+    expect(clone.next(shows).value).toEqual(
+      put(actions.loadShowsSuccess({ shows, hasMore: true }))
     );
   });
 
-  it('should end after load series on success', () => {
-    const series = [
+  it('should end after load shows on success', () => {
+    const shows = [
       {
         _id: 'tt4272070',
         imdb_id: 'tt4272070',
@@ -173,14 +173,14 @@ describe('series reducer', () => {
     const clone = generator.clone();
     clone.next({});
     clone.next(['', '', '']);
-    clone.next(series);
+    clone.next(shows);
     expect(clone.next().done).toEqual(true);
   });
 
-  it('should load series on error', () => {
+  it('should load shows on error', () => {
     const clone = generator.clone();
     expect(clone.throw('ERROR').value).toEqual(
-      put(actions.loadSeriesError('ERROR'))
+      put(actions.loadShowsError('ERROR'))
     );
   });
 

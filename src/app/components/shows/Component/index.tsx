@@ -11,7 +11,7 @@ const styles: StyleRulesCallback = () => ({
   }
 });
 
-class SeriesComponent extends React.Component<{
+class ShowsComponent extends React.Component<{
   classes: Record<string, string>;
 }> {
   render() {
@@ -24,4 +24,4 @@ class SeriesComponent extends React.Component<{
   }
 }
 
-export default withStyles(styles)(SeriesComponent);
+export default withStyles(styles)(ShowsComponent);

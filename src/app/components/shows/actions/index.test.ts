@@ -2,15 +2,15 @@ import * as actions from './';
 import * as types from '../constants';
 
 describe('actions', () => {
-  it('should create an action LOAD_SERIES', () => {
+  it('should create an action LOAD_SHOWS', () => {
     const expectedAction = {
-      type: types.LOAD_SERIES,
+      type: types.LOAD_SHOWS,
       payload: 10
     };
-    expect(actions.loadSeries(10)).toEqual(expectedAction);
+    expect(actions.loadShows(10)).toEqual(expectedAction);
   });
-  it('should create an action LOAD_SERIES_SUCCESS', () => {
-    const series = [
+  it('should create an action LOAD_SHOWS_SUCCESS', () => {
+    const shows = [
       {
         _id: 'tt4272070',
         imdb_id: 'tt4272070',
@@ -58,40 +58,40 @@ describe('actions', () => {
       }
     ];
     const expectedAction = {
-      type: types.LOAD_SERIES_SUCCESS,
-      payload: { series, hasMore: false }
+      type: types.LOAD_SHOWS_SUCCESS,
+      payload: { shows, hasMore: false }
     };
-    expect(actions.loadSeriesSuccess({ series, hasMore: false })).toEqual(
+    expect(actions.loadShowsSuccess({ shows, hasMore: false })).toEqual(
       expectedAction
     );
   });
-  it('should create an action LOAD_SERIES_ERROR', () => {
+  it('should create an action LOAD_SHOWS_ERROR', () => {
     const error = 'error';
     const expectedAction = {
-      type: types.LOAD_SERIES_ERROR,
+      type: types.LOAD_SHOWS_ERROR,
       payload: error
     };
-    expect(actions.loadSeriesError(error)).toEqual(expectedAction);
+    expect(actions.loadShowsError(error)).toEqual(expectedAction);
   });
-  it('should create an action CHANGE_SERIES_FILTER', () => {
+  it('should create an action CHANGE_SHOWS_FILTER', () => {
     const filter = { keywords: 'AAA' };
     const expectedAction = {
-      type: types.CHANGE_SERIES_FILTER,
+      type: types.CHANGE_SHOWS_FILTER,
       payload: filter
     };
-    expect(actions.changeSeriesFilter(filter)).toEqual(expectedAction);
+    expect(actions.changeShowsFilter(filter)).toEqual(expectedAction);
   });
-  it('should create an action CHANGE_SERIES_SCROLL_POSITION', () => {
+  it('should create an action CHANGE_SHOWS_SCROLL_POSITION', () => {
     const expectedAction = {
-      type: types.CHANGE_SERIES_SCROLL_POSITION,
+      type: types.CHANGE_SHOWS_SCROLL_POSITION,
       payload: 5
     };
-    expect(actions.changeSeriesScrollPosition(5)).toEqual(expectedAction);
+    expect(actions.changeShowsScrollPosition(5)).toEqual(expectedAction);
   });
-  it('should create an action RESET_SERIES', () => {
+  it('should create an action RESET_SHOWS', () => {
     const expectedAction = {
-      type: types.RESET_SERIES
+      type: types.RESET_SHOWS
     };
-    expect(actions.resetSeries()).toEqual(expectedAction);
+    expect(actions.resetShows()).toEqual(expectedAction);
   });
 });
