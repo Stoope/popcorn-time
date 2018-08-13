@@ -21,7 +21,7 @@ const styles: StyleRulesCallback = theme => ({
   }
 });
 
-class SortOrderComponent extends React.Component<
+class SortByComponent extends React.Component<
   Props,
   {
     tooltipOpen: boolean;
@@ -82,4 +82,4 @@ class SortOrderComponent extends React.Component<
   }
 }
 
-export default withStyles(styles)(injectIntl(SortOrderComponent));
+export default withStyles(styles)(injectIntl(SortByComponent));
