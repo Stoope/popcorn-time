@@ -27,5 +27,13 @@
   "app.SettingsBody.deepOrange": "Deep orange",
   "app.SettingsBody.brown": "Brown",
   "app.DialogHeader.title": "Settings",
-  "app.shows.searchPlaceholder": "Search…"
+  "app.shows.searchPlaceholder": "Search…",
+  "app.shows.searchTooltip": "Search",
+  "app.shows.sortDirection": "Sort direction",
+  "app.shows.sortBy": "Sort by",
+  "app.shows.sort.name": "Name",
+  "app.shows.sort.rating": "Rating",
+  "app.shows.sort.trending": "Trending",
+  "app.shows.sort.updated": "Updated",
+  "app.shows.sort.year": "Year"
 }

@@ -7,6 +7,7 @@ export type State = {
     sort?: 'name' | 'rating' | 'trending' | 'updated' | 'year';
     order?: 1 | -1;
     genre?:
+      | 'all'
       | 'action'
       | 'adventure'
       | 'animation'

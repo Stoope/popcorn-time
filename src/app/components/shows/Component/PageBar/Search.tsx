@@ -8,6 +8,7 @@ import EventListener from 'react-event-listener';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 
 type Props = {
   value: string;
@@ -63,7 +64,7 @@ const styles: StyleRulesCallback = theme => ({
   }
 });
 
-class GridComponent extends React.Component<Props> {
+class SearchComponent extends React.Component<Props> {
   inputRef: React.RefObject<HTMLInputElement>;
   constructor(props: Props) {
     super(props);
@@ -91,20 +92,28 @@ class GridComponent extends React.Component<Props> {
         <div className={classes.search}>
           <SearchIcon />
         </div>
-        <Input
-          disableUnderline={true}
-          placeholder={intl.formatMessage(messages.app_shows_searchPlaceholder)}
-          onChange={this.changeFilter}
-          value={value}
-          inputRef={this.inputRef}
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput
-          }}
-        />
+        <Tooltip
+          disableFocusListener={true}
+          placement="bottom"
+          title={intl.formatMessage(messages.app_shows_searchTooltip)}
+        >
+          <Input
+            disableUnderline={true}
+            placeholder={intl.formatMessage(
+              messages.app_shows_searchPlaceholder
+            )}
+            onChange={this.changeFilter}
+            value={value}
+            inputRef={this.inputRef}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
+            }}
+          />
+        </Tooltip>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(injectIntl(GridComponent));
+export default withStyles(styles)(injectIntl(SearchComponent));

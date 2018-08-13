@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import Search from './Search';
+import SortOrder from './SortOrder';
+import SortBy from './SortBy';
 
 type Props = {
   filter: State['showsReducer']['filter'];
@@ -27,7 +29,7 @@ class PageBarComponent extends React.Component<Props> {
     const {
       intl,
       classes,
-      filter: { keywords = '' },
+      filter: { keywords = '', order = -1, sort = 'rating' },
       changeFilter
     } = this.props;
     return (
@@ -37,6 +39,8 @@ class PageBarComponent extends React.Component<Props> {
             {intl.formatMessage(messages.app_shows_title)}
           </Typography>
           <div className={classes.grow} />
+          <SortOrder order={order} changeFilter={changeFilter} />
+          <SortBy sort={sort} changeFilter={changeFilter} />
           <Search value={keywords} changeFilter={changeFilter} />
         </Toolbar>
       </AppBar>
