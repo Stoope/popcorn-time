@@ -1,5 +1,5 @@
 import React from 'react';
-import messages from '../index.messages';
+import messages from './index.messages';
 import { showsActions } from '~/components/shows';
 import keycode from 'keycode';
 import Input from '@material-ui/core/Input';
@@ -20,7 +20,7 @@ const styles: StyleRulesCallback = theme => ({
   root: {
     fontFamily: theme.typography.fontFamily,
     position: 'relative',
-    marginRight: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit,
     marginLeft: theme.spacing.unit,
     borderRadius: 2,
     background: fade(
@@ -95,12 +95,12 @@ class SearchComponent extends React.Component<Props> {
         <Tooltip
           disableFocusListener={true}
           placement="bottom"
-          title={intl.formatMessage(messages.app_shows_searchTooltip)}
+          title={intl.formatMessage(messages.app_filter_searchTooltip)}
         >
           <Input
             disableUnderline={true}
             placeholder={intl.formatMessage(
-              messages.app_shows_searchPlaceholder
+              messages.app_filter_searchPlaceholder
             )}
             onChange={this.changeFilter}
             value={value}

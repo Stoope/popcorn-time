@@ -1,5 +1,5 @@
 import React from 'react';
-import messages from '../index.messages';
+import messages from './index.messages';
 import { showsActions } from '~/components/shows';
 import MenuItem from '@material-ui/core/MenuItem';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
@@ -51,7 +51,7 @@ class SortByComponent extends React.Component<
       <Tooltip
         placement="bottom"
         open={tooltipOpen}
-        title={intl.formatMessage(messages.app_shows_sortBy)}
+        title={intl.formatMessage(messages.app_filter_sortBy)}
       >
         <Select
           value={sort}
@@ -62,19 +62,19 @@ class SortByComponent extends React.Component<
           onClick={this.closeTooltip}
         >
           <MenuItem value="name">
-            {intl.formatMessage(messages.app_shows_sort_name)}
+            {intl.formatMessage(messages.app_filter_sort_name)}
           </MenuItem>
           <MenuItem value="rating">
-            {intl.formatMessage(messages.app_shows_sort_rating)}
+            {intl.formatMessage(messages.app_filter_sort_rating)}
           </MenuItem>
           <MenuItem value="trending">
-            {intl.formatMessage(messages.app_shows_sort_trending)}
+            {intl.formatMessage(messages.app_filter_sort_trending)}
           </MenuItem>
           <MenuItem value="updated">
-            {intl.formatMessage(messages.app_shows_sort_updated)}
+            {intl.formatMessage(messages.app_filter_sort_updated)}
           </MenuItem>
           <MenuItem value="year">
-            {intl.formatMessage(messages.app_shows_sort_year)}
+            {intl.formatMessage(messages.app_filter_sort_year)}
           </MenuItem>
         </Select>
       </Tooltip>

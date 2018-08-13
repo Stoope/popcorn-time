@@ -1,6 +1,8 @@
 import React from 'react';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import Grid from './Grid';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
+import messages from './index.messages';
 import PageBar from './PageBar';
 
 const styles: StyleRulesCallback = () => ({
@@ -11,17 +13,21 @@ const styles: StyleRulesCallback = () => ({
   }
 });
 
-class ShowsComponent extends React.Component<{
-  classes: Record<string, string>;
-}> {
+class ShowsComponent extends React.Component<
+  {
+    classes: Record<string, string>;
+  } & InjectedIntlProps
+> {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <PageBar />
+        <PageBar
+          title={this.props.intl.formatMessage(messages.app_shows_title)}
+        />
         <Grid />
       </div>
     );
   }
 }
 
-export default withStyles(styles)(ShowsComponent);
+export default withStyles(styles)(injectIntl(ShowsComponent));

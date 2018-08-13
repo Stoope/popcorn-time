@@ -1,5 +1,5 @@
 import React from 'react';
-import messages from '../index.messages';
+import messages from './index.messages';
 import { showsActions } from '~/components/shows';
 import Sort from '@material-ui/icons/Sort';
 import IconButton from '@material-ui/core/IconButton';
@@ -39,7 +39,7 @@ class SortOrderComponent extends React.Component<Props> {
       <Tooltip
         disableFocusListener={true}
         placement="bottom"
-        title={intl.formatMessage(messages.app_shows_sortDirection)}
+        title={intl.formatMessage(messages.app_filter_sortDirection)}
       >
         <IconButton className={classes.root} onClick={this.changeSortOrder}>
           <Sort
