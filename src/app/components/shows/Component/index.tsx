@@ -5,7 +5,7 @@ import PageBar from './PageBar';
 
 const styles: StyleRulesCallback = () => ({
   root: {
-    height: '100vh',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column'
   }

@@ -16,6 +16,16 @@ const messages = defineMessages({
     id: 'app.shows.searchPlaceholder',
     defaultMessage: 'Search…',
     description: 'Search shows placeholder'
+  },
+  app_shows_searchTooltip: {
+    id: 'app.shows.searchTooltip',
+    defaultMessage: 'Search',
+    description: 'Search tooltip'
+  },
+  app_shows_sortDirection: {
+    id: 'app.shows.sortDirection',
+    defaultMessage: 'Sort direction',
+    description: 'Sort direction tooltip'
   }
 });
 
