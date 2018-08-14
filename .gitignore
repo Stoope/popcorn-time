@@ -38,3 +38,6 @@ dist
 
 # build report
 report.html
+
+# vscode config
+.vscode
