@@ -6,10 +6,11 @@
   "main": "./src/index.js",
   "license": "MIT",
   "scripts": {
-    "parcel:dev": "rm -rf build/* && parcel ./src/app/index.html -d build/ ",
+    "parcel:dev": "parcel ./src/app/index.html -d build/ ",
     "electron:dev": "ELECTRON_START_URL=http://localhost:1234 electron .",
     "start": "concurrently \"yarn parcel:dev\" \"yarn electron:dev\" \"yarn test:watch\"",
     "precommit": "lint-staged",
+    "prebuild": "rm -rf build/*",
     "build": "rm -rf build/* && parcel build ./src/app/index.html -d build/ --public-url ./ && electron-builder",
     "test": "jest --config jest.config.json",
     "test:watch": "yarn jest --config jest.config.json --watch",
