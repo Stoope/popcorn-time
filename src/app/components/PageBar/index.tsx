@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { State } from 'types';
 import { showsActions } from '~/components/shows';
 import AppBar from '@material-ui/core/AppBar';
@@ -49,11 +48,4 @@ class PageBarComponent extends React.Component<Props> {
   }
 }
 
-export default connect(
-  (state: State) => ({
-    filter: state.showsReducer.filter
-  }),
-  {
-    changeFilter: showsActions.changeShowsFilter
-  }
-)(withStyles(styles)(PageBarComponent));
+export default withStyles(styles)(PageBarComponent);

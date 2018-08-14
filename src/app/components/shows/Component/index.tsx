@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { showsActions } from '~/components/shows';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
 import Grid from './Grid';
+import { State } from 'types';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import messages from './index.messages';
-import PageBar from './PageBar';
+import PageBar from '~/components/PageBar';
 
 const styles: StyleRulesCallback = () => ({
   root: {
@@ -16,13 +19,18 @@ const styles: StyleRulesCallback = () => ({
 class ShowsComponent extends React.Component<
   {
     classes: Record<string, string>;
+    filter: State['showsReducer']['filter'];
+    changeFilter: typeof showsActions.changeShowsFilter;
   } & InjectedIntlProps
 > {
   render() {
+    const { classes, intl, filter, changeFilter } = this.props;
     return (
-      <div className={this.props.classes.root}>
+      <div className={classes.root}>
         <PageBar
-          title={this.props.intl.formatMessage(messages.app_shows_title)}
+          filter={filter}
+          changeFilter={changeFilter}
+          title={intl.formatMessage(messages.app_shows_title)}
         />
         <Grid />
       </div>
@@ -30,4 +38,11 @@ class ShowsComponent extends React.Component<
   }
 }
 
-export default withStyles(styles)(injectIntl(ShowsComponent));
+export default connect(
+  (state: State) => ({
+    filter: state.showsReducer.filter
+  }),
+  {
+    changeFilter: showsActions.changeShowsFilter
+  }
+)(withStyles(styles)(injectIntl(ShowsComponent)));
