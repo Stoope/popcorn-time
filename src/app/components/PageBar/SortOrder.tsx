@@ -1,17 +1,15 @@
 import React from 'react';
 import messages from './index.messages';
-import { showsActions } from '~/components/shows';
 import Sort from '@material-ui/icons/Sort';
 import IconButton from '@material-ui/core/IconButton';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import classNames from 'classnames';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
-import { State } from 'types';
 
 type Props = {
-  order: State['showsReducer']['filter']['order'];
-  changeFilter: typeof showsActions.changeShowsFilter;
+  order: Filter['order'];
+  changeFilter: (filter: Filter) => any;
   classes: Record<string, string>;
 } & InjectedIntlProps;
 

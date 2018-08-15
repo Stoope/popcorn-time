@@ -1,6 +1,4 @@
 import React from 'react';
-import { State } from 'types';
-import { showsActions } from '~/components/shows';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -11,9 +9,9 @@ import SortBy from './SortBy';
 import Genre from './Genre';
 
 type Props = {
-  filter: State['showsReducer']['filter'];
+  filter: Filter;
   title: string;
-  changeFilter: typeof showsActions.changeShowsFilter;
+  changeFilter: (filter: Filter) => any;
   classes: Record<string, string>;
 };
 

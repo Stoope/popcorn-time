@@ -1,16 +1,14 @@
 import React from 'react';
 import messages from './index.messages';
-import { showsActions } from '~/components/shows';
 import MenuItem from '@material-ui/core/MenuItem';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, StyleRulesCallback } from '@material-ui/core/styles';
-import { State } from 'types';
 import Select from '@material-ui/core/Select';
 
 type Props = {
-  genre: State['showsReducer']['filter']['genre'];
-  changeFilter: typeof showsActions.changeShowsFilter;
+  genre: Filter['genre'];
+  changeFilter: (filter: Filter) => any;
   classes: Record<string, string>;
 } & InjectedIntlProps;
 
@@ -41,7 +39,7 @@ class GenreComponent extends React.Component<
     child: React.ReactNode
   ) => {
     this.props.changeFilter({
-      genre: event.target.value as State['showsReducer']['filter']['genre']
+      genre: event.target.value as Filter['genre']
     });
   };
   render() {

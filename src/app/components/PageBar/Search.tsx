@@ -1,6 +1,5 @@
 import React from 'react';
 import messages from './index.messages';
-import { showsActions } from '~/components/shows';
 import keycode from 'keycode';
 import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
@@ -12,7 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 type Props = {
   value: string;
-  changeFilter: typeof showsActions.changeShowsFilter;
+  changeFilter: (filter: Filter) => any;
   classes: Record<string, string>;
 } & InjectedIntlProps;
 
