@@ -22,27 +22,32 @@ type Props = {
   children: React.ReactElement<any>;
 };
 
-class MaterialUI extends React.Component<Props, { muTheme: Theme }> {
-  constructor(props: Props) {
-    super(props);
-    const { config } = props;
-    this.state = {
-      muTheme: generateMuiTheme(config.theme)
-    };
+const MaterialUI = (WrappedComponent: React.ComponentType<any>) => {
+  class Component extends React.Component<Props, { muTheme: Theme }> {
+    constructor(props: Props) {
+      super(props);
+      const { config } = props;
+      this.state = {
+        muTheme: generateMuiTheme(config.theme)
+      };
+    }
+    static getDerivedStateFromProps(props: Props) {
+      const { config } = props;
+      return { muTheme: generateMuiTheme(config.theme) };
+    }
+    render() {
+      return (
+        <MuiThemeProvider theme={this.state.muTheme}>
+          <CssBaseline>
+            <WrappedComponent {...this.props} />
+          </CssBaseline>
+        </MuiThemeProvider>
+      );
+    }
   }
-  static getDerivedStateFromProps(props: Props) {
-    const { config } = props;
-    return { muTheme: generateMuiTheme(config.theme) };
-  }
-  render() {
-    return (
-      <MuiThemeProvider theme={this.state.muTheme}>
-        <CssBaseline>{this.props.children}</CssBaseline>
-      </MuiThemeProvider>
-    );
-  }
-}
+  return connect((state: State) => ({
+    config: state.settingsReducer.config
+  }))(Component);
+};
 
-export default connect((state: State) => ({
-  config: state.settingsReducer.config
-}))(MaterialUI);
+export default MaterialUI;

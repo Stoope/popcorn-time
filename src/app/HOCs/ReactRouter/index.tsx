@@ -1,10 +1,12 @@
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
 
-class ReactRouter extends React.Component {
-  render() {
-    return <HashRouter>{this.props.children}</HashRouter>;
-  }
-}
+const ReactRouter = (WrappedComponent: React.ComponentType<any>) => ({
+  ...props
+}) => (
+  <HashRouter>
+    <WrappedComponent {...props} />
+  </HashRouter>
+);
 
 export default ReactRouter;

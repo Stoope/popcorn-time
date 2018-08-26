@@ -32,7 +32,8 @@ const styles: StyleRulesCallback = theme => ({
   },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
+    height: '100vh'
   }
 });
 

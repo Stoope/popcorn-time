@@ -11,23 +11,27 @@ type Props = {
   children: React.ReactElement<any>;
 };
 
-class ReactIntl extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-    addLocaleData([...locale_en, ...locale_ru]);
+const ReactIntl = (WrappedComponent: React.ComponentType<any>) => {
+  class Component extends React.Component<Props> {
+    constructor(props: Props) {
+      super(props);
+      addLocaleData([...locale_en, ...locale_ru]);
+    }
+    render() {
+      const {
+        config: { locale = 'en' },
+        ...props
+      } = this.props;
+      return (
+        <IntlProvider locale={locale} messages={messages[locale]}>
+          <WrappedComponent {...props} />
+        </IntlProvider>
+      );
+    }
   }
-  render() {
-    const {
-      config: { locale = 'en' }
-    } = this.props;
-    return (
-      <IntlProvider locale={locale} messages={messages[locale]}>
-        {this.props.children}
-      </IntlProvider>
-    );
-  }
-}
+  return connect((state: State) => ({
+    config: state.settingsReducer.config
+  }))(Component);
+};
 
-export default connect((state: State) => ({
-  config: state.settingsReducer.config
-}))(ReactIntl);
+export default ReactIntl;
